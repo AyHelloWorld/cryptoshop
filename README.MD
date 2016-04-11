@@ -9,7 +9,7 @@ and GnuPG graphically.
 
 General Specifications :
 -----------------
-py_cryptoshop encrypt files with one of this three algorithms in CTR mode:
+py_cryptoshop encrypt files with one of this three algorithms in [CTR mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation):
 - [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 - [Serpent-256](https://en.wikipedia.org/wiki/Serpent_%28cipher%29)
 - [Twofish-256](https://en.wikipedia.org/wiki/Twofish)
