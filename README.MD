@@ -65,8 +65,10 @@ It generate a 64 bits key with the user passphrase and a random 256 bits salt. T
 split in two 32 bits keys. One for encryption and one for authentication.
 
 <b>2- Encryption</b>
+
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
 py_cryptoshop use Serpent-256.
+
 Encryption is optimized for larges files. The file is encrypted chunk by chunk. All encrypted
 chunks use a different random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary
 for CTR mode... NEVER USE THE SAME KEY WITH THE SAME NONCE.
