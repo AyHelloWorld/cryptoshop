@@ -117,6 +117,6 @@ Python modules:
 
 There is a lot of bad (really really bad...) encryption modules for python.
 - no authentication.
-- else, authentication routine, use naive comparison like if m1==m2 mac is good. This aproch permit Timing Attack.
+- else, authentication routine use naive comparison like if m1==m2 mac is good. This aproch permit Timing Attack.
 - use unsecured algorithms like MD5 or SHA-1 etc...
--
+- bad use the encryption mode. Reuse nonce for same key, fixed initialization vector when it must be random etc...
