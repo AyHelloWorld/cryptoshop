@@ -79,7 +79,8 @@ The final cryptoshop format is:
 <b>Decryption</b>
 
 The decryption routine check the header before all other operations to check version. She decrypt the file
-chunk by chunk with etch corresponding nonce. The authentication is updated with all encrypted chunks.
+chunk by chunk with etch corresponding nonce. The authentication is updated iteratively with all encrypted chunks
+during the main loop.
 
 <b>3- Authentication</b>
 
@@ -90,7 +91,7 @@ More information's here:
 - http://keccak.noekeon.org/
 
 The authentication code is calculated with header, salt and etch nonce/encrypted chunk.
-It is applied on all encrypted chunk and NOT ON CLEAR CHUNK to prevent padding-oracle attacks vulnerability
+It is applied on all encrypted chunk and NOT ON CLEAR CHUNK to prevent [padding-oracle attacks vulnerability](https://en.wikipedia.org/wiki/Padding_oracle_attack)
 when it is applied on the plaintext.
 The decryption routine read the hmac code in the encrypted file, and compare it with the calculated.
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
