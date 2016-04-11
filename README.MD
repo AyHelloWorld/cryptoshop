@@ -98,12 +98,12 @@ py_cryptoshop use a constant timing algorithm verification to prevent Timing Att
 <i>if hamac1 == hmac2</i>
 
 <b>4- License</b>
-Cryptoshop is under GPL License. See LICENSE text file ( license.gpl ) for more information's.
+py_cryptoshop is under GPL License. See <i>py_cryptoshop_license text file</i> for more information's.
 
 <b>5- Requirement</b>
-Python 3.5
-Botan library
+- Python >= 3
+- Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
-Python modules
-tqdm  <--- console progress-bar
-botan <--- Python module is installed with the library
+Python modules:
+- tqdm  <--- console progress-bar
+- botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
