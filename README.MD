@@ -78,7 +78,7 @@ The final cryptoshop format is:
 
 <b>Decryption</b>
 
-The decryption routine check the header before all other operations to check version. She decrypt the file
+The decryption routine check the header before all other operations. She decrypt the file
 chunk by chunk with etch corresponding nonce. The authentication is updated iteratively with all encrypted chunks
 during the main loop.
 
@@ -94,7 +94,7 @@ The authentication code is calculated with header, salt and etch nonce/encrypted
 It is applied on all encrypted chunk and NOT ON CLEAR CHUNK to prevent [padding-oracle attacks vulnerability](https://en.wikipedia.org/wiki/Padding_oracle_attack)
 when it is applied on the plaintext.
 The decryption routine read the hmac code in the encrypted file, and compare it with the calculated.
-py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
+py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive
 <i>if hamac1 == hmac2</i>
 
 ###Requirement
@@ -102,9 +102,9 @@ py_cryptoshop use a constant timing algorithm verification to prevent Timing Att
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
 Python modules:
-- tqdm  <--- console progress-bar
-- argon2_cffi <--- Python module/wrapper for Argon2
-- botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
+- [tqdm](https://github.com/tqdm/tqdm)  <--- console progress-bar
+- [argon2_cffi](https://github.com/hynek/argon2_cffi) <--- Python module/wrapper for Argon2
+- [botan](http://botan.randombit.net/manual/python.html) <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
 ###License
 
