@@ -3,10 +3,9 @@ py-cryptoshop
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-Description :
------------------
 py_cryptoshop is the crypto module of Cryptoshop (a full Qt5 application for use this module
 and GnuPG graphically.
+
 
 Generals Specifications :
 -----------------
