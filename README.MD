@@ -75,10 +75,12 @@ for CTR mode... NEVER USE THE SAME KEY WITH THE SAME NONCE.
 The contenair result is [header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........]
 
 <b>1- Decryption</b>
+
 The decryption routine check the header before all other operations to check version. She decrypt the file
 chunk by chunk with etch corresponding nonce. The authentication is updated with all encrypted chunks.
 
 <b>3- Authentication</b>
+
 Authentication is performed by HMAC(Keccak-1600). Keccak-1600 is the Winner Of SHA-3 Competition.
 The authentication code is calculated with header, salt and etch nonce/encryped chunk.
 It is applied on all encryped chunk and NOT ON CLEAR CHUNK to prevent padding-oracle attacks vulnerability
