@@ -103,9 +103,11 @@ py_cryptoshop use a constant timing algorithm verification to prevent Timing Att
 
 Python modules:
 - tqdm  <--- console progress-bar
+- argon2_cffi <--- Python module/wrapper for Argon2
 - botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
 <b>4- License</b>
 
 - py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
+- argon2_cffi is released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
