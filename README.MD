@@ -47,11 +47,11 @@ py_cryptoshop is optimized for large files.
     from py_cryptoshop import encryptfile
     from py_cryptoshop import decryptfile
 
-    $ result = encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
-    $ print(result["success"])
+    result = encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
+    print(result["success"])
 
-    $ result = decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
-    $ print(result["success"])
+    result = decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
+    print(result["success"])
 
 Advanced Specifications :
 -----------------
