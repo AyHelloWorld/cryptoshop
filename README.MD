@@ -31,10 +31,10 @@ decrypt the file test.cryptoshop. No need to specify algo. It is detected automa
     from py_cryptoshop import encryptfile
     from py_cryptoshop import decryptfile
 
-    $ result = stream.encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
+    $ result = encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
     $ print(result["success"])
 
-    $ result = stream.decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
+    $ result = decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
     $ print(result["success"])
 
 Advanced Specifications :
