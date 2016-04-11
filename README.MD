@@ -73,7 +73,7 @@ Encryption is optimized for larges files. The file is encrypted chunk by chunk. 
 chunks use a different random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary
 for CTR mode... NEVER USE THE SAME KEY WITH THE SAME NONCE.
 
-The contenair result is:
+The final cryptoshop format is:
 
 [ header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........ ]
 
@@ -97,7 +97,7 @@ The decryption routine read the hmac code in the encrypted file, and compare it 
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
 <i>if hamac1 == hmac2</i>
 
-<b>5- Requirement</b>
+<b>4- Requirement</b>
 - Python >= 3
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
@@ -106,8 +106,17 @@ Python modules:
 - argon2_cffi <--- Python module/wrapper for Argon2
 - botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
-<b>4- License</b>
+<b>5- License</b>
 
 - py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
+
+<b>6- Why py_cryptoshop ?</b>
+<i>It's easy to make a bad crypto but is hard to get right...</i>
+
+There is a lot of bad (really really bad...) encryption modules for python.
+- no authentication.
+- else, authentication routine, use naive comparison like if m1==m2 mac is good. This aproch permit Timing Attack.
+- use unsecured algorithms like MD5 or SHA-1 etc...
+-
