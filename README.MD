@@ -128,6 +128,36 @@ etc ...
 A very good encryption module is [simple-crypt](https://github.com/andrewcooke/simple-crypt) but the usage of PyCrypto eliminate the usage of Serpent, and make PBKDF2 very slow. Finally, it was't designed for encrypt big files.
 
 ###Other resources
+Same recommendations of the Botan author:
+You should have some knowledge of cryptography *before* trying to use
+or modify this module. This is an area where it is very easy to make mistakes,
+and where things are often subtle and/or counterintuitive.
+
+The module tries to provide things at a high level precisely to
+minimize the number of ways things can go wrong, but naive modifications will
+almost certainly not result in a secure system.
+
+Especially recommended are:
+
+- *Cryptography Engineering*
+  by Niels Ferguson, [Bruce Schneier](https://www.schneier.com/), and Tadayoshi Kohno
+
+- *Security Engineering -- A Guide to Building Dependable Distributed Systems*
+  by Ross Anderson
+  [available online](https://www.cl.cam.ac.uk/~rja14/book.html)
+
+- *Handbook of Applied Cryptography*
+by Alfred J. Menezes, Paul C. Van Oorschot, and Scott A. Vanstone
+[available online](http://www.cacr.math.uwaterloo.ca/hac/)
+
+If you're doing something non-trivial or unique, you might want to at
+the very least ask for review/input on a mailing list such as the
+[metzdowd](http://www.metzdowd.com/mailman/listinfo/cryptography) or
+[randombit](http://lists.randombit.net/mailman/listinfo/cryptography)
+crypto lists. And (if possible) pay a professional cryptographer or
+security company to review your design and code.
+
+
 http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf
 http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
 https://en.wikipedia.org/wiki/Timing_attack
