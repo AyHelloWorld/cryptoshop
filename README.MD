@@ -28,14 +28,14 @@ decrypt the file test.cryptoshop. No need to specify algo. It is detected automa
 
 <b>You can use it like module for your python application:</b>
 
-$ from py_cryptoshop import encryptfile
-$ from py_cryptoshop import decryptfile
+    from py_cryptoshop import encryptfile
+    from py_cryptoshop import decryptfile
 
-$ result = stream.encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
-$ print(result["success"])
+    $ result = stream.encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
+    $ print(result["success"])
 
-$ result = stream.decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
-$ print(result["success"])
+    $ result = stream.decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
+    $ print(result["success"])
 
 Advanced Specifications :
 -----------------
