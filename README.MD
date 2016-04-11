@@ -54,7 +54,7 @@ py_cryptoshop is optimized for large files.
 
 Advanced Specifications :
 -----------------
-<b>Key derivation/stretching</b>
+####<u>1- Key derivation/stretching :</u>
 
 The user passphrase derivation is performed with the winner of the Password Hashing
 competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
@@ -63,7 +63,7 @@ Argon2 use a fixed timing calculation and not iterations, to prevent [Timing att
 It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
 split in two 32 bits keys. One for encryption and one for authentication.
 
-<b>Encryption</b>
+####<u>2- Encryption :</u>
 
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
 py_cryptoshop use Serpent-256.
@@ -79,13 +79,13 @@ The final cryptoshop format is:
 ![](https://github.com/Antidote1911/py_cryptoshop/blob/master/cryptoshop_format.png)
 
 
-<b>Decryption</b>
+####<u>3- Decryption :</u>
 
 The decryption routine check the header before all other operations. She decrypt the file
 chunk by chunk with etch corresponding nonce. The authentication is updated iteratively with all encrypted chunks
 during the main loop.
 
-<b>Authentication</b>
+####<u>4- Authentication :</u>
 
 Authentication is performed by HMAC(Keccak-1600). Keccak-1600 is the Winner Of SHA-3 Competition.
 
@@ -100,7 +100,7 @@ The decryption routine read the hmac code in the encrypted file, and compare it 
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive
 <i>if hamac1 == hmac2</i>
 
-###Requirement
+##Requirement
 - Python >= 3
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
@@ -109,13 +109,13 @@ Python modules:
 - [argon2_cffi](https://github.com/hynek/argon2_cffi) <--- Python module/wrapper for Argon2
 - [botan](http://botan.randombit.net/manual/python.html) <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
-###License
+##License
 
 - py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
-###Why py_cryptoshop ?
+##Why py_cryptoshop ?
 
 <i>It's easy to make a bad crypto but is hard to get right...</i>
 
@@ -131,7 +131,7 @@ etc ...
 
 A very good encryption module is [simple-crypt](https://github.com/andrewcooke/simple-crypt) but the usage of PyCrypto eliminate the usage of Serpent, and make PBKDF2 very slow. Finally, it was't designed for encrypt big files.
 
-###Other resources
+##Other resources
 Same recommendations of the [Botan author](http://botan.randombit.net/):
 
 <i>"You should have some knowledge of cryptography *before* trying to use
