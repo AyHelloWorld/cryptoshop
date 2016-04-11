@@ -32,7 +32,8 @@ py_cryptoshop is optimized for large files.
 <b>You can use it like console application:</b>
 
     # encrypt the file test with AES-256.
-    # If no algo is specified, Serpent-256 (-a srp) is default. Encrypted file test.cryptoshop is writed in same folder:
+    # If no algo is specified, Serpent-256 (-a srp) is default.
+    # Encrypted file test.cryptoshop is writed in same folder:
     ./py_cryptoshop -e test -a aes
 
 
