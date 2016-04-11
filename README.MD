@@ -130,7 +130,7 @@ A very good encryption module is [simple-crypt](https://github.com/andrewcooke/s
 ###Other resources
 Same recommendations of the [Botan author](http://botan.randombit.net/):
 
-You should have some knowledge of cryptography *before* trying to use
+<i>You should have some knowledge of cryptography *before* trying to use
 or modify this module. This is an area where it is very easy to make mistakes,
 and where things are often subtle and/or counterintuitive.
 
@@ -156,7 +156,7 @@ the very least ask for review/input on a mailing list such as the
 [metzdowd](http://www.metzdowd.com/mailman/listinfo/cryptography) or
 [randombit](http://lists.randombit.net/mailman/listinfo/cryptography)
 crypto lists. And (if possible) pay a professional cryptographer or
-security company to review your design and code.
+security company to review your design and code.</i>
 
 
 http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf
