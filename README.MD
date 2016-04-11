@@ -30,6 +30,7 @@ For more information on Argon2:
 py_cryptoshop is optimized for large files.
 
 <b>You can use it like console application:</b>
+
 encrypt the file test with AES-256. If no algo (argument -a) is specified, Serpent-256 (-a srp) is default. Encrypted file test.cryptoshop is writed in same folder:
 
     ./py_cryptoshop -e test -a aes
