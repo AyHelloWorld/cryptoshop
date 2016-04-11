@@ -95,7 +95,7 @@ It is applied on all encryped chunk and NOT ON CLEAR CHUNK to prevent padding-or
 when it is applied on the plaintext.
 The decryption routine read the hmac code in the encrypted file, and compare it with the calculated.
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
-if hamac1 == hmac2
+<i>if hamac1 == hmac2</i>
 
 <b>4- License</b>
 Cryptoshop is under GPL License. See LICENSE text file ( license.gpl ) for more information's.
