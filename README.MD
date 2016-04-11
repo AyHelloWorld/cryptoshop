@@ -113,11 +113,13 @@ Python modules:
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
 <b>6- Why py_cryptoshop ?</b>
+
 <i>It's easy to make a bad crypto but is hard to get right...</i>
 
 There is a lot of bad (really really bad...) encryption modules for python.
 - no authentication.
 - else, authentication routine use naive comparison like if m1==m2 mac is good. This aproch permit Timing Attack.
 - use unsecured algorithm like MD5 or SHA-1 etc...
-- bad use of the encryption mode. Reuse nonce for same key, fixed initialization vector when it must be random etc...
-- Passphrase derivation/stretching with iterative hash function. They are NOT make for this usage. Use real derivation algo like Argo2 or PBKDF
+- bad use of the encryption mode. Reuse nonce for same key in CTR, fixed initialization vector when it must be random etc...
+- Passphrase derivation/stretching with iterative hash function. Hash are NOT make for this usage. Good for brute-force ! Use strong Key Derivation Functions (KDF) algo like Argo2 or PBKDF.
+- Systematically use pycrypto. Pycrypto is a good module, but there is no Serpent algo, and some functions like PBKDF are very slow because it's a pure Python implementation.
