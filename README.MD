@@ -160,5 +160,7 @@ security company to review your design and code.
 
 
 http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf
+
 http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
+
 https://en.wikipedia.org/wiki/Timing_attack
