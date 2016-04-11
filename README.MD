@@ -59,7 +59,7 @@ Advanced Specifications :
 The user passphrase derivation is performed with the winner of the Password Hashing
 competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
 
-Argon2 use a fixed timing calculation and not iterations, to prevent Timing attack.
+Argon2 use a fixed timing calculation and not iterations, to prevent [Timing attack](https://en.wikipedia.org/wiki/Timing_attack).
 It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
 split in two 32 bits keys. One for encryption and one for authentication.
 
@@ -70,7 +70,7 @@ py_cryptoshop use Serpent-256.
 
 Encryption is optimized for larges files. The file is encrypted chunk by chunk. All encrypted
 chunks use a different random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary
-for CTR mode... NEVER USE THE SAME KEY WITH THE SAME NONCE.
+for CTR mode... [NEVER USE THE SAME KEY WITH THE SAME NONCE](http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf).
 
 The final cryptoshop format is:
 
