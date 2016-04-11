@@ -7,7 +7,7 @@ py_cryptoshop is the crypto module of Cryptoshop (a full Qt5 application for use
 and GnuPG graphically.
 
 
-Generals Specifications :
+General Specifications :
 -----------------
 py_cryptoshop encrypt files with one of this three algorithms in CTR mode:
 - AES-256
@@ -96,7 +96,7 @@ The decryption routine read the hmac code in the encrypted file, and compare it 
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
 <i>if hamac1 == hmac2</i>
 
-<b>4- Requirement</b>
+###<b>4- Requirement</b>
 - Python >= 3
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
@@ -105,13 +105,13 @@ Python modules:
 - argon2_cffi <--- Python module/wrapper for Argon2
 - botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
-<b>5- License</b>
+###<b>5- License</b>
 
 - py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
-<b>6- Why py_cryptoshop ?</b>
+###<b>6- Why py_cryptoshop ?</b>
 
 <i>It's easy to make a bad crypto but is hard to get right...</i>
 
