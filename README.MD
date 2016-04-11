@@ -10,9 +10,9 @@ and GnuPG graphically.
 General Specifications :
 -----------------
 py_cryptoshop encrypt files with one of this three algorithms in CTR mode:
-- AES-256
-- Serpent-256
-- Twofish-256
+- [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+- [Serpent-256](https://en.wikipedia.org/wiki/Serpent_%28cipher%29)
+- [Twofish-256](https://en.wikipedia.org/wiki/Twofish)
 
 It use Botan. Crypto and TLS library for C++11.
 For more information's on Botan, go here:
@@ -41,7 +41,7 @@ py_cryptoshop is optimized for large files.
     ./py_cryptoshop -d test.cryptoshop
 
 
-<b>You can use it like module for your python application:</b>
+<b>You can use it like a module for your Python application:</b>
 
     from py_cryptoshop import encryptfile
     from py_cryptoshop import decryptfile
@@ -57,7 +57,7 @@ Advanced Specifications :
 <b>Key derivation/stretching</b>
 
 The user passphrase derivation is performed with the winner of the Password Hashing
-competition, Argon2.
+competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
 
 Argon2 use a fixed timing calculation and not iterations, to prevent Timing attack.
 It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
