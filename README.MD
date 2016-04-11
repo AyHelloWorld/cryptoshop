@@ -81,8 +81,8 @@ chunk by chunk with etch corresponding nonce. The authentication is updated with
 
 <b>3- Authentication</b>
 
-Authentication is performed by HMAC(Keccak-1600).
-Keccak-1600 is the Winner Of SHA-3 Competition.
+Authentication is performed by HMAC(Keccak-1600). Keccak-1600 is the Winner Of SHA-3 Competition.
+
 The authentication code is calculated with header, salt and etch nonce/encryped chunk.
 It is applied on all encryped chunk and NOT ON CLEAR CHUNK to prevent padding-oracle attacks vulnerability
 when it is applied on the plaintext.
