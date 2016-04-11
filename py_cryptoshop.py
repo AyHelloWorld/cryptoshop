@@ -173,7 +173,7 @@ def decryptfile(filename, passphrase):
     :return: a dictionary with the results.
     """
     try:
-        outname = os.path.splitext(filename)[0].split("_")[-1]  # create a file name without extension.
+        outname = os.path.splitext(filename)[0].split("_")[-1]  # create a string file name without extension.
         with open(filename, 'rb') as filestream:
 
             with open(str(outname), 'wb') as filestreamout:
@@ -210,7 +210,7 @@ def decryptfile(filename, passphrase):
                     bar.update(1)
                 hmacfinal = hmac_master.final()
 
-                # hmac verification...
+                # hmac verification constant time verification...
                 verify = _hmac_verify(hmacfinal, filehmac)
                 if verify is False:
                     os.remove(outname)
