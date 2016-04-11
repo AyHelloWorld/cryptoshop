@@ -16,9 +16,17 @@ py_cryptoshop encrypt files with one of this three algorithms in CTR mode:
 - Twofish-256
 
 It use Botan. Crypto and TLS library for C++11.
-For more information on Botan, go here: http://botan.randombit.net/manual/python.html
+For more information on Botan, go here:
+- http://botan.randombit.net
+- https://github.com/randombit/botan
+- https://en.wikipedia.org/wiki/Botan_(programming_library)
 
 It use Argon2 for key derivation/stetching and HMAC-Keccak-1600 for message authentication.
+For more information on Argon2:
+- https://en.wikipedia.org/wiki/Argon2
+- https://www.cryptolux.org/index.php/Argon2
+- https://github.com/P-H-C/phc-winner-argon2
+
 py_cryptoshop is optimized for large files.
 
 <b>You can use it like console application:</b>
