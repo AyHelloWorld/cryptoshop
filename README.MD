@@ -72,7 +72,10 @@ py_cryptoshop use Serpent-256.
 Encryption is optimized for larges files. The file is encrypted chunk by chunk. All encrypted
 chunks use a different random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary
 for CTR mode... NEVER USE THE SAME KEY WITH THE SAME NONCE.
-The contenair result is [header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........]
+
+The contenair result is:
+
+ [header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........]
 
 <b>1- Decryption</b>
 
