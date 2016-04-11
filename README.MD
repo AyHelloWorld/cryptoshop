@@ -75,6 +75,7 @@ for CTR mode... [NEVER USE THE SAME KEY WITH THE SAME NONCE](http://csrc.nist.go
 The final cryptoshop format is:
 
 [ header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........ ]
+![](https://github.com/Antidote1911/py_cryptoshop/blob/master/cryptoshop_format.png)
 
 <b>Decryption</b>
 
