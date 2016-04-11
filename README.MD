@@ -59,6 +59,7 @@ Advanced Specifications :
 
 The user passphrase derivation is performed with the winner of the Password Hashing
 competition, Argon2.
+
 Argon2 use a fixed timing calculation and not iterations, to prevent Timing attack.
 It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
 split in two 32 bits keys. One for encryption and one for authentication.
