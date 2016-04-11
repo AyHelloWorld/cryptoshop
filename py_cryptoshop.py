@@ -102,12 +102,12 @@ def _encry_decry_chunk(chunk, key, algo, bool_encry):
 
 def encryptfile(filename, passphrase, algo):
     """
-    Encrypt a file.
+    Encrypt a file and write it with .cryptoshop extension.
 
     :param filename: A string with the path to the file to encrypt.
     :param passphrase: A string with the user passphrase.
     :param algo: A string with the algorithm. Can be srp, aes, twf.
-    :return: a corresponding encrypted file with .cryptoshop for extension.
+    :return: a dictionary with the results.
     """
     try:
         if algo == "srp":
