@@ -107,4 +107,4 @@ Python modules:
 
 <b>4- License</b>
 
-py_cryptoshop is under GPL License. See <i>py_cryptoshop_license text file</i> for more information's.
+py_cryptoshop is under GPL License. See <i>py_cryptoshop_license</i> text file for more information's.
