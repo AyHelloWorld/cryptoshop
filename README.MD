@@ -54,7 +54,7 @@ py_cryptoshop is optimized for large files.
 
 Advanced Specifications :
 -----------------
-<b>1- Key derivation/stretching</b>
+<b>Key derivation/stretching</b>
 
 The user passphrase derivation is performed with the winner of the Password Hashing
 competition, Argon2.
@@ -63,7 +63,7 @@ Argon2 use a fixed timing calculation and not iterations, to prevent Timing atta
 It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
 split in two 32 bits keys. One for encryption and one for authentication.
 
-<b>2- Encryption</b>
+<b>Encryption</b>
 
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
 py_cryptoshop use Serpent-256.
@@ -76,7 +76,7 @@ The final cryptoshop format is:
 
 [ header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........ ]
 
-<b>1- Decryption</b>
+<b>Decryption</b>
 
 The decryption routine check the header before all other operations to check version. She decrypt the file
 chunk by chunk with etch corresponding nonce. The authentication is updated with all encrypted chunks.
@@ -96,7 +96,7 @@ The decryption routine read the hmac code in the encrypted file, and compare it 
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
 <i>if hamac1 == hmac2</i>
 
-###<b>4- Requirement</b>
+###Requirement
 - Python >= 3
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
 
@@ -105,13 +105,13 @@ Python modules:
 - argon2_cffi <--- Python module/wrapper for Argon2
 - botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
 
-###<b>5- License</b>
+###License
 
 - py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
-###<b>6- Why py_cryptoshop ?</b>
+###Why py_cryptoshop ?
 
 <i>It's easy to make a bad crypto but is hard to get right...</i>
 
@@ -125,4 +125,9 @@ There is a lot of bad (really really bad...) encryption modules for python.
 - No optimization for big files.
 etc ...
 
-A very good encryption module is [simple-crypt](https://github.com/andrewcooke/simple-crypt) but the usage of PyCrypto eliminate the usage of Serpent, and make PBKDF2 very slow. Finally, it was't designed for encrypt files.
+A very good encryption module is [simple-crypt](https://github.com/andrewcooke/simple-crypt) but the usage of PyCrypto eliminate the usage of Serpent, and make PBKDF2 very slow. Finally, it was't designed for encrypt big files.
+
+###Other resources
+http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf
+http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
+https://en.wikipedia.org/wiki/Timing_attack
