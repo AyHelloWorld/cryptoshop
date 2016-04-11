@@ -61,9 +61,14 @@ def _calc_derivation2(passphrase, salt):
 
 
 def _hmac_verify(hmac, mac):
-    # The hmac comparison not use a naive "if hmac1==hmac" to prevent Timing Attack. We use constant time verification.
-    # https://en.wikipedia.org/wiki/Timing_attack
+    """
+    The hmac comparison not use a naive "if hmac1==hmac" to prevent Timing Attack. We use constant time algorithm.
+    https://en.wikipedia.org/wiki/Timing_attack
 
+    :param hmac: bytes string with the first mac.
+    :param mac: bytes string with the second mac.
+    :return: True or False with always same time calculation.
+    """
     if len(hmac) != len(mac):
         return
     result = 0
