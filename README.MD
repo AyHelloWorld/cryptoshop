@@ -128,7 +128,8 @@ etc ...
 A very good encryption module is [simple-crypt](https://github.com/andrewcooke/simple-crypt) but the usage of PyCrypto eliminate the usage of Serpent, and make PBKDF2 very slow. Finally, it was't designed for encrypt big files.
 
 ###Other resources
-Same recommendations of the Botan author:
+Same recommendations of the [Botan author](http://botan.randombit.net/):
+
 You should have some knowledge of cryptography *before* trying to use
 or modify this module. This is an area where it is very easy to make mistakes,
 and where things are often subtle and/or counterintuitive.
