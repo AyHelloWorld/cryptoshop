@@ -97,9 +97,6 @@ The decryption routine read the hmac code in the encrypted file, and compare it 
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
 <i>if hamac1 == hmac2</i>
 
-<b>4- License</b>
-py_cryptoshop is under GPL License. See <i>py_cryptoshop_license text file</i> for more information's.
-
 <b>5- Requirement</b>
 - Python >= 3
 - Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
@@ -107,3 +104,7 @@ py_cryptoshop is under GPL License. See <i>py_cryptoshop_license text file</i> f
 Python modules:
 - tqdm  <--- console progress-bar
 - botan <--- Botan Python module/wrapper is installed with the Botan library 1.29
+
+<b>4- License</b>
+
+py_cryptoshop is under GPL License. See <i>py_cryptoshop_license text file</i> for more information's.
