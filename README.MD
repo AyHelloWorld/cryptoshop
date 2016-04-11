@@ -107,5 +107,5 @@ Python modules:
 
 <b>4- License</b>
 
-- py_cryptoshop is under [GPL License](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license)
+- py_cryptoshop is under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
 - Botan released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
