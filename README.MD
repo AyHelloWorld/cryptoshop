@@ -3,7 +3,7 @@ py-cryptoshop
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-py_cryptoshop is the crypto module of Cryptoshop (a full Qt5 application for use this module
+py_cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop) (a full Qt5 application for use this module
 and GnuPG graphically.
 
 
