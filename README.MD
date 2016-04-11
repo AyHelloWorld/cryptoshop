@@ -85,7 +85,7 @@ The decryption routine check the header before all other operations. She decrypt
 chunk by chunk with etch corresponding nonce. The authentication is updated iteratively with all encrypted chunks
 during the main loop.
 
-<b>3- Authentication</b>
+<b>Authentication</b>
 
 Authentication is performed by HMAC(Keccak-1600). Keccak-1600 is the Winner Of SHA-3 Competition.
 
