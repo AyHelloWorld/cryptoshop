@@ -90,8 +90,8 @@ More information's here:
 - https://en.wikipedia.org/wiki/SHA-3
 - http://keccak.noekeon.org/
 
-The authentication code is calculated with header, salt and etch nonce/encryped chunk.
-It is applied on all encryped chunk and NOT ON CLEAR CHUNK to prevent padding-oracle attacks vulnerability
+The authentication code is calculated with header, salt and etch nonce/encrypted chunk.
+It is applied on all encrypted chunk and NOT ON CLEAR CHUNK to prevent padding-oracle attacks vulnerability
 when it is applied on the plaintext.
 The decryption routine read the hmac code in the encrypted file, and compare it with the calculated.
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a trivial
