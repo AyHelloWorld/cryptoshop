@@ -86,7 +86,7 @@ The final cryptoshop format is:
 - The decryption routine check the header before all other operations.
 - The hmac of the 'encrypted-key' is verified.
 - If the hmac is correct, the 'encrypted-key' is decrypted.
-- The decryption routine decrypt all chunks with the 'decrypted-key'
+- The decryption routine decrypt all chunks with this 'decrypted-key'
 - The internal-hmac is verified
 
 
