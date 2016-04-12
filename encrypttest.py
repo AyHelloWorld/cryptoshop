@@ -4,7 +4,7 @@
 from py_cryptoshop import encryptfile
 from py_cryptoshop import decryptfile
 
-result = encryptfile(filename="test", passphrase="mypassword", algo="twf")
+result = encryptfile(filename="test", passphrase="mypassword", algo="srp")
 print(result["success"])
 
 result2 = decryptfile(filename="test.cryptoshop", passphrase="mypassword")

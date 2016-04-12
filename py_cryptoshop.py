@@ -177,7 +177,7 @@ def encryptfile(filename, passphrase, algo):
                     tmpstream.write(hmac_internal.final())
                     tmpstream.write(hmac_internal_salt)
                     while True:
-                        chunk = file.read(chunk_size)
+                        chunk = file.read(chunk_size*100)
                         tmpstream.write(chunk)
                         if len(chunk) == 0:
                             break
