@@ -95,7 +95,6 @@ The final cryptoshop format is:
     ---------------                                   *
     ***************************************************
 
-(An encryptedchunk is a concatenation of an unique nonce and cipher chunk)
 
 ####<u>3- Decryption :</u>
 
