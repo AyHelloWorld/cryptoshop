@@ -77,9 +77,9 @@ random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY
 
 The final cryptoshop format is:
 
-[ HEADER || master_salt || master_hmac || encrypted_internal_key || internal_hmac || internal_salt || (nonce1||chunck1), (nonce2||chunck2),... ]
+[header, salt1, hmac1, encrypted_key, hmac2, salt2, encryptedchuk1, encryptedchuk2.....]
 
-
+(An encryptedchunk is a concatenation of an unique nonce and cipher chunk)
 
 ####<u>3- Decryption :</u>
 
@@ -99,9 +99,7 @@ More information's here:
 - https://en.wikipedia.org/wiki/SHA-3
 - http://keccak.noekeon.org/
 
-- The two authentication (master and internal) are calculated with the encrypted data. NOT WITH CLEAR DATA.
-- The master authentication include the header, salt and encrypted_internal_key.
-- The internal authentication include the header, internal_salt, and etch encrypted chunk
+The two authentication (master and internal) are calculated with the encrypted data. NOT WITH CLEAR DATA.
 
 The decryption routine read the two hmac code in the encrypted file, and compare it with the calculated values.
 py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive <i>if hamac1 == hmac2</i>
