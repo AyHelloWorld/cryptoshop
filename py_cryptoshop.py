@@ -168,7 +168,7 @@ def encryptfile(filename, passphrase, algo):
                 # for write hmac code at the beginning, we need to write it in a different file, and append the content
                 # of the encrypted file. Finally, we rename the tmp file with final name, and delete the encrypted file.
                 # The final file structure is:
-                # [header, salt1, hmac1, encrypted_key, hmac2, salt2, encryptedchuk1, encryptedchuk2.....]
+                # [header, salt1, hmac1, encrypted_key, hmac2, salt2, encryptedchunk1, encryptedchunk2.....]
                 with open(str(".crypto_tmp"), 'wb') as tmpstream:
                     tmpstream.write(header)  # 18
                     tmpstream.write(master_pass_salt)  # 512
