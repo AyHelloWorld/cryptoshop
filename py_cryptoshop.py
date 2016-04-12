@@ -36,7 +36,7 @@ argon2_timing_cost = 3000
 argon2_memory_cost = 1024
 argon2_parallelism = 2
 
-chunk_size = 400000  # in bytes.
+chunk_size = 500000  # in bytes. (0.5 Mo)
 
 # hmac_size must be 64 for hmac_algo= "HMAC(SHA-512)" or hmac_algo= "HMAC(Keccak-1600)"
 # 32 for hmac_algo= "HMAC(SHA-256)"  for example.
@@ -154,6 +154,7 @@ def encryptfile(filename, passphrase, algo):
                 bar = tqdm(range(file_size // chunk_size))
                 while not finished:
                     chunk = filestream.read(chunk_size)
+                    print(file_size)
                     if len(chunk) == 0 or len(chunk) % chunk_size != 0:
                         finished = True
                     # encrypt a chunk and return an encryptedchunk (concatenation of an unique nonce + encryptedchunk)

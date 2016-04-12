@@ -78,12 +78,12 @@ The final cryptoshop format is:
 
     ***************************************************
     -header                                 18 bits   *
-    -pass-salt || hmac-salt            64 + 64 bits   *
+    -pass-salt || hmac-salt          256 + 256 bits   *
     -hmac                                  512 bits   *
     ***************************                       *
     nonce || encrypted_internal_key  128 + 256 bits   *
     hmac_internal                          512 bits   *
-    internal_salt                      64 + 64 bits   *
+    internal_salt                    256 + 256 bits   *
     ---------------------------                       *
     nonce1 || cipherchunk1       128 bits + chunkSize *
     ---------------                                   *
@@ -95,6 +95,9 @@ The final cryptoshop format is:
     ---------------                                   *
     ***************************************************
 
+128 bits = 16 bytes
+256 bits = 32 bytes
+chunksize is fixed to 0,5 Mo (500000 bytes)
 
 ####<u>3- Decryption :</u>
 
