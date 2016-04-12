@@ -60,30 +60,39 @@ The user passphrase derivation is performed with the winner of the Password Hash
 competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
 
 Argon2 use a fixed timing calculation and not iterations, to prevent [Timing attack](https://en.wikipedia.org/wiki/Timing_attack).
-It generate a 64 bits key with the user passphrase and a random 256 bits salt. This key is
-split in two 32 bits keys. One for encryption and one for authentication.
 
 ####<u>2- Encryption :</u>
 
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
 py_cryptoshop use Serpent-256.
 
-Encryption is optimized for larges files. The file is encrypted chunk by chunk. All encrypted
-chunks use a different random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary
-for CTR mode... [NEVER USE THE SAME KEY WITH THE SAME NONCE](http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf).
+- A random 512 'master_salt' is generated. It is split in two 256 bits salts. One for Argon2 derivation and one for authentication.
+- Argon2 generate a 64 bits master-key with the user passphrase and one of the two 256 bits salt.
+- This key is split in two 32 bits keys. One for encrypt the the random 32 bits 'internal key' and one for authenticate the encrypted 'internal key'.
+- The file is encrypted with the 'internal key'.
+
+
+Encryption is optimized for larges files.
+
+The file is encrypted chunk by chunk with the 'internal-key'. Etch iteration calculate an 'internal-hmac'. All encrypted chunks use a different
+random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary for CTR mode...
+[NEVER USE THE SAME KEY WITH THE SAME NONCE](http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf).
 
 The final cryptoshop format is:
 
-[ header, HMAC, Salt, (nonce1||chunck1), (nonce2||chunck2), (nonce3||chunck3),........ ]
+[ HEADER || master_salt || master_hmac || encrypted_internal_key || internal_hmac || internal_salt || (nonce1||chunck1), (nonce2||chunck2),... ]
 
-![](https://github.com/Antidote1911/py_cryptoshop/blob/master/cryptoshop_format.png)
 
 
 ####<u>3- Decryption :</u>
 
-The decryption routine check the header before all other operations. She decrypt the file
-chunk by chunk with etch corresponding nonce. The authentication is updated iteratively with all encrypted chunks
-during the main loop.
+- The decryption routine check the header before all other operations.
+- The hmac of the 'encrypted-key' is verified.
+- If the hmac is correct, the 'encrypted-key' is decrypted.
+- The decryption routine decrypt all chunks with the 'decrypted-key'
+- The internal-hmac is verified
+
+
 
 ####<u>4- Authentication :</u>
 
@@ -93,11 +102,12 @@ More information's here:
 - https://en.wikipedia.org/wiki/SHA-3
 - http://keccak.noekeon.org/
 
-The authentication code is calculated with header, salt and etch nonce/encrypted chunk.
-It is applied on all encrypted chunk and NOT ON CLEAR CHUNK.
-The decryption routine read the hmac code in the encrypted file, and compare it with the calculated.
-py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive
-<i>if hamac1 == hmac2</i>
+- The two authentication (master and internal) are calculated with the encrypted data. NOT WITH CLEAR DATA.
+- The master authentication include the header, salt and encrypted_internal_key.
+- The internal authentication include the header, internal_salt, and etch encrypted chunk
+
+The decryption routine read the two hmac code in the encrypted file, and compare it with the calculated values.
+py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive <i>if hamac1 == hmac2</i>
 
 ##Requirement
 - Python >= 3
