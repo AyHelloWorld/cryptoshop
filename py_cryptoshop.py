@@ -176,7 +176,12 @@ def encryptfile(filename, passphrase, algo):
                     tmpstream.write(encrypted_internal_key)  # (80) nonce_size + encryptedkeysize
                     tmpstream.write(hmac_internal.final())
                     tmpstream.write(hmac_internal_salt)
-                    tmpstream.write(file.read())
+                    while True:
+                        chunk = file.read(chunk_size)
+                        tmpstream.write(chunk)
+                        if len(chunk) == 0:
+                            break
+
             os.remove(outname)
             os.rename(".crypto_tmp", outname)
             outname_size = os.stat(outname).st_size
