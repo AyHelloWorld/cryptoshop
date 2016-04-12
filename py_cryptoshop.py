@@ -122,7 +122,6 @@ def encryptfile(filename, passphrase, algo):
         if algo != "srp" and algo != "aes" and algo != "twf":
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
         outname = filename + ".cryptoshop"
-
         internal_key = botan.rng().get(64)    # The internal key for encryption...
 
         master_pass_salt = botan.rng().get(salt_size)
