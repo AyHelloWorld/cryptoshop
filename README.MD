@@ -115,7 +115,7 @@ chunksize is fixed to 0,5 Mo (500000 bytes)
 
 Authentication is performed by HMAC(Keccak-1600). Keccak-1600 is the Winner Of SHA-3 Competition.
 
-More information's here:
+More informations here:
 - https://en.wikipedia.org/wiki/SHA-3
 - http://keccak.noekeon.org/
 
