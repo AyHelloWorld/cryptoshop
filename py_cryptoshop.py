@@ -30,7 +30,7 @@ import argparse
 from tqdm import *
 
 nonce_length = 16  # in bytes.(128 bits) Must be 16 for Serpent/CTR-BE
-salt_size = 512    # in bits.(32 bytes)
+salt_size = 512  # in bits.(32 bytes)
 
 argon2_timing_cost = 3000
 argon2_memory_cost = 1024
@@ -38,7 +38,7 @@ argon2_parallelism = 2
 
 chunk_size = 500000  # in bytes. (0.5 Mo)
 
-# hmac_size must be 64 for hmac_algo= "HMAC(SHA-512)" or hmac_algo= "HMAC(Keccak-1600)"
+# hmac_length must be 64 for hmac_algo= "HMAC(SHA-512)" or hmac_algo= "HMAC(Keccak-1600)"
 # 32 for hmac_algo= "HMAC(SHA-256)"  for example.
 hmac_algo = "HMAC(Keccak-1600)"
 hmac_length = 64
@@ -122,16 +122,16 @@ def encryptfile(filename, passphrase, algo):
         if algo != "srp" and algo != "aes" and algo != "twf":
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
         outname = filename + ".cryptoshop"
-        internal_key = botan.rng().get(64)    # The internal key for encryption...
+        internal_key = botan.rng().get(64)  # The internal key for encryption...
 
         master_pass_salt = botan.rng().get(salt_size)
 
         # Passphrase derivation...
-        masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:(salt_size//2)])
+        masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:(salt_size // 2)])
         encrypted_internal_key = _encry_decry_chunk(chunk=internal_key, key=masterkey[0], algo=crypto_algo,
                                                     bool_encry=True)
         # Hmac encrypted_internal_key...
-        hmac_salt = master_pass_salt[(salt_size//2):]
+        hmac_salt = master_pass_salt[(salt_size // 2):]
         hmac = botan.message_authentication_code(algo=hmac_algo)
         hmac.set_key(masterkey[1])
         hmac.update(header)
@@ -220,10 +220,10 @@ def decryptfile(filename, passphrase):
                 encrypted_internal_key = filestream.read(nonce_length + 64)  # nonce length + encryptedkey length
 
                 # Derive the passphrase...
-                masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:salt_size//2])
+                masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:salt_size // 2])
 
                 # hmac encrypted_internal_key verification. If good, the internal key is decrypted...
-                hmac_salt = master_pass_salt[salt_size//2:]
+                hmac_salt = master_pass_salt[salt_size // 2:]
                 hmac = botan.message_authentication_code(algo=hmac_algo)
                 hmac.set_key(masterkey[1])
                 hmac.update(fileheader)
