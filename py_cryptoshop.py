@@ -206,41 +206,40 @@ def decryptfile(filename, passphrase):
     try:
         outname = os.path.splitext(filename)[0].split("_")[-1]  # create a string file name without extension.
         with open(filename, 'rb') as filestream:
+            fileheader = filestream.read(18)
+
+            if fileheader == b"Cryptoshop srp 1.0":
+                decrypt_algo = "Serpent/CTR-BE"
+            if fileheader == b"Cryptoshop aes 1.0":
+                decrypt_algo = "AES-256/CTR-BE"
+            if fileheader == b"Cryptoshop twf 1.0":
+                decrypt_algo = "Twofish/CTR-BE"
+            if fileheader != b"Cryptoshop srp 1.0" and fileheader != b"Cryptoshop aes 1.0" and fileheader != b"Cryptoshop twf 1.0":
+
+                return {"success": "Error: Bad header"}
+
+            master_pass_salt = filestream.read(salt_size)
+            master_hmac = filestream.read(hmac_length)
+            encrypted_internal_key = filestream.read(nonce_length + 64)  # nonce length + encryptedkey length
+
+            # Derive the passphrase...
+            masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:salt_size // 2])
+
+            # hmac encrypted_internal_key verification. If good, the internal key is decrypted...
+            hmac_salt = master_pass_salt[salt_size // 2:]
+            hmac = botan.message_authentication_code(algo=hmac_algo)
+            hmac.set_key(masterkey[1])
+            hmac.update(fileheader)
+            hmac.update(hmac_salt)
+            hmac.update(encrypted_internal_key)
+
+            calculated_master_hmac = hmac.final()
+            verify = _hmac_verify(calculated_master_hmac, master_hmac)
+            if verify is False:
+
+                return {"success": "Bad password or corrupt / modified data."}
 
             with open(str(outname), 'wb') as filestreamout:
-                fileheader = filestream.read(18)
-
-                if fileheader == b"Cryptoshop srp 1.0":
-                    decrypt_algo = "Serpent/CTR-BE"
-                if fileheader == b"Cryptoshop aes 1.0":
-                    decrypt_algo = "AES-256/CTR-BE"
-                if fileheader == b"Cryptoshop twf 1.0":
-                    decrypt_algo = "Twofish/CTR-BE"
-                if fileheader != b"Cryptoshop srp 1.0" and fileheader != b"Cryptoshop aes 1.0" and fileheader != b"Cryptoshop twf 1.0":
-                    os.remove(outname)
-                    return {"success": "Error: Bad header"}
-
-                master_pass_salt = filestream.read(salt_size)
-                master_hmac = filestream.read(hmac_length)
-                encrypted_internal_key = filestream.read(nonce_length + 64)  # nonce length + encryptedkey length
-
-                # Derive the passphrase...
-                masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:salt_size // 2])
-
-                # hmac encrypted_internal_key verification. If good, the internal key is decrypted...
-                hmac_salt = master_pass_salt[salt_size // 2:]
-                hmac = botan.message_authentication_code(algo=hmac_algo)
-                hmac.set_key(masterkey[1])
-                hmac.update(fileheader)
-                hmac.update(hmac_salt)
-                hmac.update(encrypted_internal_key)
-
-                calculated_master_hmac = hmac.final()
-                verify = _hmac_verify(calculated_master_hmac, master_hmac)
-                if verify is False:
-                    os.remove(outname)
-                    return {"success": "Bad password or corrupt / modified data."}
-
                 # decrypt internal key...
                 decrypted_internal_key = _encry_decry_chunk(chunk=encrypted_internal_key, key=masterkey[0],
                                                             algo=decrypt_algo,
