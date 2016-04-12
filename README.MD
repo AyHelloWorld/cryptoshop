@@ -120,8 +120,6 @@ Python modules:
 
 ##Why py_cryptoshop ?
 
-<i>It's easy to make a bad crypto but is hard to get right...</i>
-
 There is a lot of bad (really really bad...) encryption modules for python.
 - no authentication.
 - else, authentication routine use naive comparison like <i>if m1==m2 mac is good</i>. This approach permit Timing Attack.
