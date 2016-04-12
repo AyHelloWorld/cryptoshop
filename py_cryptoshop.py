@@ -121,17 +121,17 @@ def encryptfile(filename, passphrase, algo):
             crypto_algo = "Twofish/CTR-BE"
         if algo != "srp" and algo != "aes" and algo != "twf":
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
-
         outname = filename + ".cryptoshop"
 
-        internal_key = botan.rng().get(64)    # The internal key encryption...
-        print(botan.hex_encode(internal_key))
+        internal_key = botan.rng().get(64)    # The internal key for encryption...
 
         master_pass_salt = botan.rng().get(salt_size)
+
+        # Passphrase derivation...
         masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:(salt_size//2)])
         encrypted_internal_key = _encry_decry_chunk(chunk=internal_key, key=masterkey[0], algo=crypto_algo,
                                                     bool_encry=True)
-
+        # Hmac encrypted_internal_key...
         hmac_salt = master_pass_salt[(salt_size//2):]
         hmac = botan.message_authentication_code(algo=hmac_algo)
         hmac.set_key(masterkey[1])
@@ -140,6 +140,7 @@ def encryptfile(filename, passphrase, algo):
         hmac.update(encrypted_internal_key)
         master_hmac = hmac.final()
 
+        # Instantiate the internal hmac...
         hmac_internal_salt = botan.rng().get(salt_size)
         hmac_internal = botan.message_authentication_code(algo=hmac_algo)
         hmac_internal.set_key(internal_key[:32])
@@ -156,6 +157,7 @@ def encryptfile(filename, passphrase, algo):
                     chunk = filestream.read(chunk_size)
                     if len(chunk) == 0 or len(chunk) % chunk_size != 0:
                         finished = True
+                    # encrypt a chunk and return an encryptedchunk (concatenation of an unique nonce + encryptedchunk)
                     encryptedchunk = _encry_decry_chunk(chunk=chunk, key=internal_key[32:], algo=crypto_algo,
                                                         bool_encry=True)
                     hmac_internal.update(encryptedchunk)
@@ -163,16 +165,16 @@ def encryptfile(filename, passphrase, algo):
                     bar.update(1)
 
             with open(str(outname), 'rb') as file:
-                # Because hmac final is computed at and of encryption, we cant' write directly at top of file. But...
+                # Because hmac internal is computed at and of encryption, we cant' write directly at top of file. But...
                 # for write hmac code at the beginning, we need to write it in a different file, and append the content
                 # of the encrypted file. Finally, we rename the tmp file with final name, and delete the encrypted file.
-                # The result is an encrypted file with this structure: [header, hmac, salt, encrypted_data]
+                # The final file structure is:
+                # [header, salt1, hmac1, encrypted_key, hmac2, salt2, encryptedchuk1, encryptedchuk2.....]
                 with open(str(".crypto_tmp"), 'wb') as tmpstream:
                     tmpstream.write(header)  # 18
                     tmpstream.write(master_pass_salt)  # 512
                     tmpstream.write(master_hmac)  # 64
                     tmpstream.write(encrypted_internal_key)  # (80) nonce_size + encryptedkeysize
-
                     tmpstream.write(hmac_internal.final())
                     tmpstream.write(hmac_internal_salt)
                     tmpstream.write(file.read())
