@@ -56,8 +56,7 @@ Advanced Specifications :
 -----------------
 ####<u>1- Key derivation/stretching :</u>
 
-The user passphrase derivation is performed with the winner of the Password Hashing
-competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
+The user passphrase derivation is performed with the winner of the Password Hashing Competition, [Argon2](https://en.wikipedia.org/wiki/Argon2).
 Argon2 use a fixed timing calculation and not iterations, to prevent [Timing attack](https://en.wikipedia.org/wiki/Timing_attack).
 
 ####<u>2- Encryption :</u>
