@@ -30,7 +30,7 @@ import argparse
 from tqdm import *
 
 nonce_size = 16  # in bytes.(128 bits) Must be 16 for Serpent/CTR-BE
-salt_size = 256  # in bits.(32 bytes)
+salt_size = 512  # in bits.(32 bytes)
 
 argon2_timing_cost = 3000
 argon2_memory_cost = 1024
@@ -123,12 +123,28 @@ def encryptfile(filename, passphrase, algo):
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
 
         outname = filename + ".cryptoshop"
-        salt = botan.rng().get(salt_size)
-        masterkey = _calc_derivation2(passphrase=passphrase, salt=salt)
-        hmac_master = botan.message_authentication_code(algo=hmac_algo)
-        hmac_master.set_key(masterkey[1])
-        hmac_master.update(header)
-        hmac_master.update(salt)
+
+        internal_key = botan.rng().get(64)
+        print(botan.hex_encode(internal_key))
+
+        master_pass_salt = botan.rng().get(salt_size)
+        masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:256])
+        encrypted_internal_key = _encry_decry_chunk(chunk=internal_key, key=masterkey[0], algo=crypto_algo,
+                                                    bool_encry=True)
+
+        hmac_salt = master_pass_salt[256:]
+        hmac = botan.message_authentication_code(algo=hmac_algo)
+        hmac.set_key(masterkey[1])
+        hmac.update(header)
+        hmac.update(hmac_salt)
+        hmac.update(encrypted_internal_key)
+        master_hmac = hmac.final()
+
+        hmac_internal_salt = botan.rng().get(salt_size)
+        hmac_internal = botan.message_authentication_code(algo=hmac_algo)
+        hmac_internal.set_key(internal_key[:32])
+        hmac_internal.update(header)
+        hmac_internal.update(hmac_internal_salt)
 
         with open(filename, 'rb') as filestream:
             with open(str(outname), 'wb') as filestreamout:
@@ -140,9 +156,9 @@ def encryptfile(filename, passphrase, algo):
                     chunk = filestream.read(chunk_size)
                     if len(chunk) == 0 or len(chunk) % chunk_size != 0:
                         finished = True
-                    encryptedchunk = _encry_decry_chunk(chunk=chunk, key=masterkey[0], algo=crypto_algo,
+                    encryptedchunk = _encry_decry_chunk(chunk=chunk, key=internal_key[32:], algo=crypto_algo,
                                                         bool_encry=True)
-                    hmac_master.update(encryptedchunk)
+                    hmac_internal.update(encryptedchunk)
                     filestreamout.write(encryptedchunk)
                     bar.update(1)
 
@@ -152,9 +168,13 @@ def encryptfile(filename, passphrase, algo):
                 # of the encrypted file. Finally, we rename the tmp file with final name, and delete the encrypted file.
                 # The result is an encrypted file with this structure: [header, hmac, salt, encrypted_data]
                 with open(str(".crypto_tmp"), 'wb') as tmpstream:
-                    tmpstream.write(header)
-                    tmpstream.write(hmac_master.final())
-                    tmpstream.write(salt)
+                    tmpstream.write(header)  # 18
+                    tmpstream.write(master_pass_salt)  # 512
+                    tmpstream.write(master_hmac)  # 64
+                    tmpstream.write(encrypted_internal_key)  # (80) nonce_size + encryptedkeysize
+
+                    tmpstream.write(hmac_internal.final())
+                    tmpstream.write(hmac_internal_salt)
                     tmpstream.write(file.read())
             os.remove(outname)
             os.rename(".crypto_tmp", outname)
@@ -194,26 +214,52 @@ def decryptfile(filename, passphrase):
                     os.remove(outname)
                     return {"success": "Error: Bad header"}
 
+                master_pass_salt = filestream.read(salt_size)
+                master_hmac = filestream.read(hmac_size)
+                encrypted_internal_key = filestream.read(nonce_size + 64)  # nonce+encryptedkey
+
+                # decrypt internal key, and test hmac...
+                masterkey = _calc_derivation2(passphrase=passphrase, salt=master_pass_salt[:256])
+
+                hmac_salt = master_pass_salt[256:]
+                hmac = botan.message_authentication_code(algo=hmac_algo)
+                hmac.set_key(masterkey[1])
+                hmac.update(fileheader)
+                hmac.update(hmac_salt)
+                hmac.update(encrypted_internal_key)
+
+                calculated_master_hmac = hmac.final()
+                verify = _hmac_verify(calculated_master_hmac, master_hmac)
+                if verify is False:
+                    os.remove(outname)
+                    return {"success": "Bad password or corrupt / modified data."}
+
+                decrypted_internal_key = _encry_decry_chunk(chunk=encrypted_internal_key, key=masterkey[0],
+                                                            algo=decrypt_algo,
+                                                            bool_encry=False)
+                print(botan.hex_encode(decrypted_internal_key))
+
                 filehmac = filestream.read(hmac_size)
                 salt = filestream.read(salt_size)
-                masterkey = _calc_derivation2(passphrase=passphrase, salt=salt)
-                hmac_master = botan.message_authentication_code(algo=hmac_algo)
-                hmac_master.set_key(masterkey[1])
-                hmac_master.update(fileheader)
-                hmac_master.update(salt)
+
+                hmac_internal = botan.message_authentication_code(algo=hmac_algo)
+                hmac_internal.set_key(decrypted_internal_key[:32])
+                hmac_internal.update(fileheader)
+                hmac_internal.update(salt)
                 files_size = os.stat(filename).st_size
+
                 # the maximum of the progress bar is the total chunk to process. It's files_size // chunk_size
                 bar = tqdm(range(files_size // chunk_size))
                 while True:
                     chunk = filestream.read(chunk_size + nonce_size)
-                    hmac_master.update(chunk)
+                    hmac_internal.update(chunk)
                     if len(chunk) == 0:
                         break
-                    original_chunk = _encry_decry_chunk(chunk=chunk, key=masterkey[0], algo=decrypt_algo,
+                    original_chunk = _encry_decry_chunk(chunk=chunk, key=decrypted_internal_key[32:], algo=decrypt_algo,
                                                         bool_encry=False)
                     filestreamout.write(original_chunk)
                     bar.update(1)
-                hmacfinal = hmac_master.final()
+                hmacfinal = hmac_internal.final()
 
                 # hmac verification constant time verification...
                 verify = _hmac_verify(hmacfinal, filehmac)
