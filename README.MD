@@ -65,11 +65,9 @@ Argon2 use a fixed timing calculation and not iterations, to prevent [Timing att
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
 py_cryptoshop use Serpent-256.
 
-- A random 512 'master_salt' is generated. It is split in two 256 bits salts. One for Argon2 derivation and one for authentication.
-- Argon2 generate a 64 bits master-key with the user passphrase and one of the two 256 bits salt.
-- This key is split in two 32 bits keys. One for encrypt the the random 32 bits 'internal key' and one for authenticate the encrypted 'internal key'.
-- The file is encrypted with the 'internal key'.
-
+- A random 512 bits 'master_salt' is generated. It is split in two 256 bits salts. One for Argon2 derivation and one for authentication.
+- Argon2 generate a 512 bits master-key with the user passphrase and one of the two 256 bits salt.
+- This key is split in two 256 bits keys. One for encrypt the random 256 bits 'internal-key' and one for authenticate the encrypted 'internal-key'.
 
 Encryption is optimized for larges files.
 
