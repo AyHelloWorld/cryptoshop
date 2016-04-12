@@ -76,7 +76,24 @@ random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY
 
 The final cryptoshop format is:
 
-[header, salt1, hmac1, encrypted_key, hmac2, salt2, encryptedchuk1, encryptedchuk2.....]
+***************************************************
+-header                                 18 bits   *
+-pass-salt || hmac-salt            64 + 64 bits   *
+-hmac                                  512 bits   *
+***************************                       *
+nonce || encrypted_internal_key  128 + 256 bits   *
+hmac_internal                          512 bits   *
+internal_salt                      64 + 64 bits   *
+---------------------------                       *
+nonce1 || cipherchunk1       128 bits + chunkSize *
+---------------                                   *
+nonce2 || cipherchunk2       128 bits + chunkSize *
+---------------                                   *
+nonce3 || cipherchunk3       128 bits + chunkSize *
+---------------                                   *
+nonceN || cipherchunkN       128 bits + chunkSize *
+---------------                                   *
+***************************************************
 
 (An encryptedchunk is a concatenation of an unique nonce and cipher chunk)
 
