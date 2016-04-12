@@ -154,7 +154,6 @@ def encryptfile(filename, passphrase, algo):
                 bar = tqdm(range(file_size // chunk_size))
                 while not finished:
                     chunk = filestream.read(chunk_size)
-                    print(file_size)
                     if len(chunk) == 0 or len(chunk) % chunk_size != 0:
                         finished = True
                     # encrypt a chunk and return an encryptedchunk (concatenation of an unique nonce + encryptedchunk)
