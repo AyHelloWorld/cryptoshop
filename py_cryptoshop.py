@@ -165,7 +165,7 @@ def encryptfile(filename, passphrase, algo):
                     bar.update(1)
 
             with open(str(outname), 'rb') as file:
-                # Because hmac internal is computed at and of encryption, we cant' write directly at top of file. But...
+                # Because hmac internal is computed at and of encryption, we can't write directly at top of file. But...
                 # for write hmac code at the beginning, we need to write it in a different file, and append the content
                 # of the encrypted file. Finally, we rename the tmp file with final name, and delete the encrypted file.
                 # The final file structure is:
