@@ -96,7 +96,9 @@ The final cryptoshop format is:
     ***************************************************
 
 128 bits = 16 bytes
+
 256 bits = 32 bytes
+
 chunksize is fixed to 0,5 Mo (500000 bytes)
 
 ####<u>3- Decryption :</u>
