@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*-coding:Utf-8 -*
 
 # Cryptoshop Strong file encryption.
