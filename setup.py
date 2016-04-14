@@ -71,7 +71,7 @@ setup(
         "Programming Language :: Python :: 3",
         'Topic :: Security',
         'Topic :: Security :: Cryptography',
-        'Topic :: Software Development'],
+        'Topic :: Software Development'
     ],
 
     # C'est un système de plugin, mais on s'en sert presque exclusivement
