@@ -64,6 +64,10 @@ hmac_algo = "HMAC(Keccak-1600)"
 hmac_length = 64
 
 
+def get_version():
+    return str(version.decode('utf-8'))
+
+
 def _calc_derivation2(passphrase, salt):
     """
     Calculate a 64 bytes key derivation with Argon2, and split the output in two 32 bytes key
