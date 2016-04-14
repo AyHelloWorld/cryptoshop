@@ -10,7 +10,14 @@ for use this module and GnuPG graphically.
 
 General Specifications :
 -----------------
-To install: python setup.py install
+To install with sources archive, go in the extracted folder and run in terminal:
+
+    sudo python setup.py install
+
+Or by Pypi, run:
+
+    sudo pip install cryptoshop
+
 
 Cryptoshop encrypt files with one of this three algorithms in [CTR mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation):
 - [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
