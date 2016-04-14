@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cryptoshop',
-    version='1.0',
+    version='1.1',
     packages=find_packages(),
     author="Fabrice Corraire",
     author_email="antidote1911@gmail.com",

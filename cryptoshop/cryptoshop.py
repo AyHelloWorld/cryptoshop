@@ -45,6 +45,7 @@ import argon2
 import getpass
 import argparse
 from tqdm import *
+
 try:
     import botan
 except ImportError:
@@ -53,8 +54,7 @@ except ImportError:
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
 
-
-version = b"1.0"
+version = b"1.1"
 
 nonce_length = 16  # in bytes.(128 bits) Must be 16 for Serpent/CTR-BE
 salt_size = 512  # in bits.(32 bytes)
