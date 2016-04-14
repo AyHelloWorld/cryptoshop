@@ -1,15 +1,15 @@
-py-cryptoshop
+Cryptoshop
 ===============
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-py_cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop) (a full Qt5 application for use this module
+Cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop) (a full Qt5 application for use this module
 and GnuPG graphically.
 
 
 General Specifications :
 -----------------
-py_cryptoshop encrypt files with one of this three algorithms in [CTR mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation):
+Cryptoshop encrypt files with one of this three algorithms in [CTR mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation):
 - [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 - [Serpent-256](https://en.wikipedia.org/wiki/Serpent_%28cipher%29)
 - [Twofish-256](https://en.wikipedia.org/wiki/Twofish)
@@ -26,25 +26,25 @@ For more information's on Argon2:
 - https://www.cryptolux.org/index.php/Argon2
 - https://github.com/P-H-C/phc-winner-argon2
 
-py_cryptoshop is optimized for large files.
+Cryptoshop is optimized for large files.
 
 <b>You can use it like console application:</b>
 
     # encrypt the file test with AES-256.
     # If no algo is specified, Serpent-256 (-a srp) is default.
     # Encrypted file test.cryptoshop is write in same folder:
-    ./py_cryptoshop -e test -a aes
+    ./cryptoshop -e test -a aes
 
 
     # decrypt the file test.cryptoshop.
     # No need to specify algo. It is automatically detected by decryption routine.
-    ./py_cryptoshop -d test.cryptoshop
+    ./cryptoshop -d test.cryptoshop
 
 
 <b>You can use it like a module for your Python application:</b>
 
-    from py_cryptoshop import encryptfile
-    from py_cryptoshop import decryptfile
+    from cryptoshop import encryptfile
+    from cryptoshop import decryptfile
 
     result = encryptfile(filename="test", passphrase="mypassphrase", algo="srp")
     print(result["success"])
@@ -61,8 +61,8 @@ Argon2 use a fixed timing calculation and not iterations, to prevent [Timing att
 
 ####<u>2- Encryption :</u>
 
-You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified,
-py_cryptoshop use Serpent-256.
+You can encrypt with AES-256, Serpent-256, or Twofish-256. If no algorithm is specified, Cryptoshop use Serpent-256.
+
 
 - A random 512 bits 'master_salt' is generated. It is split in two 256 bits salts. One for Argon2 derivation and one for authentication.
 - Argon2 generate a 512 bits master-key with the user passphrase and one of the two 256 bits salt.
@@ -74,7 +74,7 @@ The file is encrypted chunk by chunk with the 'internal-key'. Etch iteration cal
 random 16 bits nonce (or initialization vector if you want...). It is ABSOLUTELY necessary for CTR mode...
 [NEVER USE THE SAME KEY WITH THE SAME NONCE](http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf).
 
-The final cryptoshop format is:
+The final Cryptoshop format is:
 
     ***************************************************
     -header                                 18 bits   *
@@ -122,7 +122,7 @@ More information here:
 The two authentication (master and internal) are calculated with the encrypted data. NOT WITH CLEAR DATA.
 
 The decryption routine read the two hmac code in the encrypted file, and compare it with the calculated values.
-py_cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive <i>if hamac1 == hmac2</i>
+Cryptoshop use a constant timing algorithm verification to prevent Timing Attack. Not a naive <i>if hamac1 == hmac2</i>
 
 ##Requirement
 - Python >= 3
@@ -136,13 +136,13 @@ Python modules:
 
 ##License
 
-- py_cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/py_cryptoshop_license) License.
+- Cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/cryptoshop.license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
-##Why py_cryptoshop ?
+##Why Cryptoshop ?
 
-There is a lot of bad (really really bad...) encryption modules for python.
+There is a lot of bad encryption modules for python.
 - no authentication.
 - else, authentication routine use naive comparison like <i>if m1==m2 mac is good</i>. This approach permit Timing Attack.
 - use unsecured algorithm like ECB mode, MD5 or SHA-1 etc...

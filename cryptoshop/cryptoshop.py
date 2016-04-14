@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*-coding:Utf-8 -*
 
-# py-cryptoshop Strong file encryption.
+# Cryptoshop Strong file encryption.
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
 
 # ############################################################################
-# This file is part of Cryptoshop (full Qt5 gui for py-cryptoshop.
+# This file is part of Cryptoshop GUI (full Qt5 gui for cryptoshop).
 #
 #    Cryptoshop is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,6 +21,23 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
+"""
+    Cryptoshop implementation.
+    Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
+    It use only strong algorithms, like Argon2 password derivation, or HMAC(Keccak-1600) for
+    authentication.
+
+    Usage:
+    from cryptoshop import encryptfile
+    from cryptoshop import decryptfile
+
+    result = encryptfile(filename="test", passphrase="mypassword", algo="srp")
+    print(result["success"])
+
+    result2 = decryptfile(filename="test.cryptoshop", passphrase="mypassword")
+    print(result2["success"])
+
+"""
 import os
 import sys
 import botan
@@ -177,7 +194,7 @@ def encryptfile(filename, passphrase, algo):
                     tmpstream.write(hmac_internal.final())
                     tmpstream.write(hmac_internal_salt)
                     while True:
-                        chunk = file.read(chunk_size*100)
+                        chunk = file.read(chunk_size * 100)
                         tmpstream.write(chunk)
                         if len(chunk) == 0:
                             break
@@ -215,7 +232,6 @@ def decryptfile(filename, passphrase):
             if fileheader == b"Cryptoshop twf 1.0":
                 decrypt_algo = "Twofish/CTR-BE"
             if fileheader != b"Cryptoshop srp 1.0" and fileheader != b"Cryptoshop aes 1.0" and fileheader != b"Cryptoshop twf 1.0":
-
                 return {"success": "Error: Bad header"}
 
             master_pass_salt = filestream.read(salt_size)
@@ -236,7 +252,6 @@ def decryptfile(filename, passphrase):
             calculated_master_hmac = hmac.final()
             verify = _hmac_verify(calculated_master_hmac, master_hmac)
             if verify is False:
-
                 return {"success": "Bad password or corrupt / modified data."}
 
             with open(str(outname), 'wb') as filestreamout:
