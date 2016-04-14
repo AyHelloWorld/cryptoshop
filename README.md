@@ -143,7 +143,7 @@ Python modules:
 
 ##License
 
-- Cryptoshop is released under [GPL](https://github.com/Antidote1911/py_cryptoshop/blob/master/cryptoshop.license) License.
+- Cryptoshop is released under [GPL3](https://github.com/Antidote1911/cryptoshop/blob/master/cryptoshop.license) License.
 - Botan is released under the permissive [Simplified BSD](http://botan.randombit.net/license.txt) license.
 - argon2_cffi and tqdm are released under The [MIT](https://github.com/hynek/argon2_cffi/blob/master/LICENSE) License
 
