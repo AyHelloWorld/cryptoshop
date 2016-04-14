@@ -4,8 +4,6 @@
 from setuptools import setup, find_packages
 
 setup(
-
-    # le nom de votre bibliothèque, tel qu'il apparaitre sur pypi
     name='Cryptoshop',
     version='1.0',
     packages=find_packages(),
