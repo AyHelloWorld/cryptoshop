@@ -22,7 +22,7 @@
 # ############################################################################
 
 """
-    Cryptoshop implementation.
+    Cryptoshop 1.0 implementation.
     Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
     It use only strong algorithms, like Argon2 password derivation, or HMAC(Keccak-1600) for
     authentication.
@@ -302,8 +302,8 @@ def decryptfile(filename, passphrase):
         exit("Error: file \"" + filename + "\" was not found.")
 
 
-# ./stream.py -e test -a aes         if no algo specified, Serpent (srp) is default.
-# ./stream.py -d test.cryptoshop     no need to specify algo. It is detected by decryption routine.
+# ./cryptoshop.py -e test -a aes         if no algo specified, Serpent (srp) is default.
+# ./cryptoshop.py -d test.cryptoshop     no need to specify algo. It is detected by decryption routine.
 
 def main():
     # parse command line arguments...
@@ -314,7 +314,7 @@ def main():
                         default="srp",
                         help="specify algo. Can be srp, aes or twf. Default is srp. Not used for decrypt.")
 
-    # encrypt OR decrypt...
+    # encrypt or decrypt...
     grouped = parser.add_mutually_exclusive_group(required=True)
     grouped.add_argument("-e", "--encrypt",
                          help="encrypt file", action="store_true")

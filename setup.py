@@ -66,7 +66,7 @@ setup(
         "Programming Language :: Python",
         "Development Status :: 5 - Production/Stable",
         "License :: GPL",
-        "Natural Language :: French",
+        "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         'Topic :: Security',
@@ -88,7 +88,7 @@ setup(
 
     # A fournir uniquement si votre licence n'est pas listée dans "classifiers"
     # ce qui est notre cas
-    # license="GPL",
+    license="GPL",
 
     # Il y a encore une chiée de paramètres possibles, mais avec ça vous
     # couvrez 90% des besoins
