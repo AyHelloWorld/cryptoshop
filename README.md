@@ -8,6 +8,7 @@ antidote1911@gmail.com
 Cryptoshop is the crypto module of [Cryptoshop-GUI](https://github.com/Antidote1911/Cryptoshop-GUI) (a full Qt5 application for use this module
 and GnuPG graphically.
 
+To install: python setup.py install
 
 General Specifications :
 -----------------
