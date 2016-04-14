@@ -205,6 +205,7 @@ def encryptfile(filename, passphrase, algo='srp'):
                     tmpstream.write(encrypted_internal_key)  # (80) nonce_size + encryptedkeysize
                     tmpstream.write(hmac_internal.final())
                     tmpstream.write(hmac_internal_salt)
+                    print("Writing final file. Can take some time with big files...")
                     while True:
                         chunk = file.read(chunk_size * 100)
                         tmpstream.write(chunk)
