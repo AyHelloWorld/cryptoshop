@@ -140,7 +140,7 @@ Cryptoshop use a constant timing algorithm verification to prevent Timing Attack
 
 ##Requirement
 - Python >= 3
-- Botan library >=1.11 <---  Install the last version (1.29). Cryptoshop don't work with the 1.10 branch.
+- Botan library >=1.11 <---  Install the last version (1.11.29). Cryptoshop don't work with the 1.10 branch.
 The installation include the Python wrapper.
 
 Python modules:
