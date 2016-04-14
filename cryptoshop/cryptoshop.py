@@ -130,6 +130,14 @@ def _encry_decry_chunk(chunk, key, algo, bool_encry):
         return engine.finish(cipherchunk)
 
 
+def encryptstring():
+    print("encryptstring")
+
+
+def decryptstring():
+    print("decryptstring")
+
+
 def encryptfile(filename, passphrase, algo='srp'):
     """
     Encrypt a file and write it with .cryptoshop extension.
