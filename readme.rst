@@ -171,7 +171,7 @@ Requirement
 -----------
 
 -  Python >= 3
--  Botan library >=1.11 <--- Install the last version (1.29). Cryptoshop
+-  Botan library >=1.11 <--- Install the last version (1.11.29). Cryptoshop
    don't work with the 1.10 branch. The installation include the Python
    wrapper.
 
