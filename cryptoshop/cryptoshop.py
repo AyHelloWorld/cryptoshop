@@ -48,7 +48,7 @@ from tqdm import *
 try:
     import botan
 except ImportError:
-    print("Please install the crypto library Botan>=1.29")
+    print("Please install the last crypto library Botan.")
     print("http://botan.randombit.net/#download")
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
