@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Cryptoshop',
+    name='cryptoshop',
     version='1.0',
     packages=find_packages(),
     author="Fabrice Corraire",
@@ -26,5 +26,4 @@ setup(
         'Topic :: Software Development'
     ],
 
-    license="GPL",
 )
