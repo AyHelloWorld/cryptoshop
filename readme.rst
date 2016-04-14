@@ -1,7 +1,7 @@
 Cryptoshop
 ==========
 
-A Python 3 module to encrypt and decrypt file in CTR mode with AES,
+A Python 3 module to encrypt and decrypt files in CTR mode with AES,
 Serpent or Twofish as secure as possible.
 
 ***(C)2016 @ CORRAIRE Fabrice*** antidote1911@gmail.com
