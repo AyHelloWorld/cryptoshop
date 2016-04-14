@@ -5,13 +5,13 @@ Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as p
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-Cryptoshop is the crypto module of [Cryptoshop-GUI](https://github.com/Antidote1911/Cryptoshop-GUI) (a full Qt5 application for use this module
-and GnuPG graphically.
-
-To install: python setup.py install
+Cryptoshop is the crypto module of [Cryptoshop-GUI](https://github.com/Antidote1911/Cryptoshop-GUI) (a Qt5 application
+for use this module and GnuPG graphically.
 
 General Specifications :
 -----------------
+To install: python setup.py install
+
 Cryptoshop encrypt files with one of this three algorithms in [CTR mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation):
 - [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 - [Serpent](https://en.wikipedia.org/wiki/Serpent_%28cipher%29)
