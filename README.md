@@ -5,7 +5,7 @@ Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as p
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-Cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop-GUI) (a full Qt5 application for use this module
+Cryptoshop is the crypto module of [Cryptoshop-GUI](https://github.com/Antidote1911/Cryptoshop-GUI) (a full Qt5 application for use this module
 and GnuPG graphically.
 
 
