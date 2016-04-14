@@ -80,11 +80,11 @@ setup(
     # va faire pointer ce nom vers la fonction proclamer(). La commande sera
     # créé automatiquement.
     # La syntaxe est "nom-de-commande-a-creer = package.module:fonction".
-    # entry_points = {
-    #   'console_scripts': [
-    #       'proclame-sm = sm_lib.core:proclamer',
-    #    ],
-    # },
+    #entry_points = {
+    #'console_scripts': [
+    #'proclame-sm = sm_lib.core:proclamer',
+    #],
+    #},
 
     # A fournir uniquement si votre licence n'est pas listée dans "classifiers"
     # ce qui est notre cas
