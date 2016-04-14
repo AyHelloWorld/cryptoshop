@@ -3,7 +3,7 @@ Cryptoshop
 ***(C)2016 @ CORRAIRE Fabrice***
 antidote1911@gmail.com
 
-Cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop) (a full Qt5 application for use this module
+Cryptoshop is the crypto module of [Cryptoshop](https://github.com/Antidote1911/Cryptoshop-GUI) (a full Qt5 application for use this module
 and GnuPG graphically.
 
 

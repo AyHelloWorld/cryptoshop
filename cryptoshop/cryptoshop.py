@@ -5,7 +5,7 @@
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
 
 # ############################################################################
-# This file is part of Cryptoshop GUI (full Qt5 gui for cryptoshop).
+# This file is part of Cryptoshop-GUI (full Qt5 gui for Cryptoshop).
 #
 #    Cryptoshop is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
