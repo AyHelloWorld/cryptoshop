@@ -41,11 +41,18 @@
 """
 import os
 import sys
-import botan
 import argon2
 import getpass
 import argparse
 from tqdm import *
+try:
+    import botan
+except ImportError:
+    print("Please install the crypto library Botan>=1.29")
+    print("http://botan.randombit.net/#download")
+    print("For Linux users, try to find it in your package manager.")
+    sys.exit(0)
+
 
 version = b"1.0"
 
