@@ -46,6 +46,8 @@ import getpass
 import argparse
 from tqdm import *
 
+version = b"1.0"
+
 nonce_length = 16  # in bytes.(128 bits) Must be 16 for Serpent/CTR-BE
 salt_size = 512  # in bits.(32 bytes)
 
@@ -128,13 +130,13 @@ def encryptfile(filename, passphrase, algo):
     """
     try:
         if algo == "srp":
-            header = b"Cryptoshop srp 1.0"
+            header = b"Cryptoshop srp " + version
             crypto_algo = "Serpent/CTR-BE"
         if algo == "aes":
-            header = b"Cryptoshop aes 1.0"
+            header = b"Cryptoshop aes " + version
             crypto_algo = "AES-256/CTR-BE"
         if algo == "twf":
-            header = b"Cryptoshop twf 1.0"
+            header = b"Cryptoshop twf " + version
             crypto_algo = "Twofish/CTR-BE"
         if algo != "srp" and algo != "aes" and algo != "twf":
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
@@ -225,13 +227,13 @@ def decryptfile(filename, passphrase):
         with open(filename, 'rb') as filestream:
             fileheader = filestream.read(18)
 
-            if fileheader == b"Cryptoshop srp 1.0":
+            if fileheader == b"Cryptoshop srp " + version:
                 decrypt_algo = "Serpent/CTR-BE"
-            if fileheader == b"Cryptoshop aes 1.0":
+            if fileheader == b"Cryptoshop aes " + version:
                 decrypt_algo = "AES-256/CTR-BE"
-            if fileheader == b"Cryptoshop twf 1.0":
+            if fileheader == b"Cryptoshop twf " + version:
                 decrypt_algo = "Twofish/CTR-BE"
-            if fileheader != b"Cryptoshop srp 1.0" and fileheader != b"Cryptoshop aes 1.0" and fileheader != b"Cryptoshop twf 1.0":
+            if fileheader != b"Cryptoshop srp " + version and fileheader != b"Cryptoshop aes " + version and fileheader != b"Cryptoshop twf " + version:
                 return {"success": "Error: Bad header"}
 
             master_pass_salt = filestream.read(salt_size)
