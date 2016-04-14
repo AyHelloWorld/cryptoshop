@@ -32,14 +32,18 @@ Cryptoshop is optimized for large files.
 
 <b>You can use it like console application:</b>
 
+Linux users: Make a symlink of the module on your bin folder...
+
     # encrypt the file test with AES-256.
-    # If no algo is specified, Serpent-256 (-a srp) is default.
+    # If no algo is specified, Serpent (-a srp) is default.
     # Encrypted file test.cryptoshop is write in same folder:
+
     ./cryptoshop -e test -a aes
 
 
     # decrypt the file test.cryptoshop.
     # No need to specify algo. It is automatically detected by decryption routine.
+
     ./cryptoshop -d test.cryptoshop
 
 
@@ -128,7 +132,7 @@ Cryptoshop use a constant timing algorithm verification to prevent Timing Attack
 
 ##Requirement
 - Python >= 3
-- Botan library >= 1.29 <---  py_cryptoshop don't work with old branch of Botan (1.10)
+- Botan library >=1.11 <---  Install the last version (1.29). Cryptoshop don't work with the 1.10 branch.
 The installation include the Python wrapper.
 
 Python modules:
