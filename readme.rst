@@ -196,7 +196,7 @@ Why Cryptoshop ?
 
 There is a lot of bad encryption modules for python.
 
-- no authentication. - else, authentication routine use naive comparison like if m1==m2 mac is good. This approach permit Timing Attack.
+- no authentication. Else, authentication routine use naive comparison like if m1==m2 mac is good. This approach permit Timing Attack.
 - use unsecured algorithm like ECB mode, MD5 or SHA-1 etc...
 - bad use of the encryption mode. Reuse nonce for same key in CTR, fixed initialization vector when it must be random etc...
 - Passphrase derivation/stretching with iterative hash function. Good for brute-force with GPU ! Hash are NOT make for this usage. Use strong Key Derivation Functions (KDF) algo like Argon2 or PBKDF2.
