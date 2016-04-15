@@ -194,18 +194,14 @@ License
 Why Cryptoshop ?
 ----------------
 
-There is a lot of bad encryption modules for python. - no
-authentication. - else, authentication routine use naive comparison like
-if m1==m2 mac is good. This approach permit Timing Attack. - use
-unsecured algorithm like ECB mode, MD5 or SHA-1 etc... - bad use of the
-encryption mode. Reuse nonce for same key in CTR, fixed initialization
-vector when it must be random etc... - Passphrase derivation/stretching
-with iterative hash function. Good for brute-force with GPU ! Hash are
-NOT make for this usage. Use strong Key Derivation Functions (KDF) algo
-like Argon2 or PBKDF2. - Systematically use PyCrypto. This is a good
-module, but there is no Serpent algo, and some algo like PBKDF2 are very
-slow because it's a pure Python implementation. - No optimization for
-big files. etc ...
+There is a lot of bad encryption modules for python.
+
+- no authentication. - else, authentication routine use naive comparison like if m1==m2 mac is good. This approach permit Timing Attack.
+- use unsecured algorithm like ECB mode, MD5 or SHA-1 etc...
+- bad use of the encryption mode. Reuse nonce for same key in CTR, fixed initialization vector when it must be random etc...
+- Passphrase derivation/stretching with iterative hash function. Good for brute-force with GPU ! Hash are NOT make for this usage. Use strong Key Derivation Functions (KDF) algo like Argon2 or PBKDF2.
+- Systematically use PyCrypto. This is a good module, but there is no Serpent algo, and some algo like PBKDF2 are very slow because it's a pure Python implementation.
+- No optimization for big files. etc ...
 
 A very good encryption module is
 `simple-crypt <https://github.com/andrewcooke/simple-crypt>`__ but the
