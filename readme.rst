@@ -4,7 +4,7 @@ Cryptoshop
 A Python 3 module to encrypt and decrypt files in CTR mode with AES,
 Serpent or Twofish as secure as possible.
 
-***(C)2016 @ CORRAIRE Fabrice*** antidote1911@gmail.com
+antidote1911@gmail.com
 
 Cryptoshop is the crypto module of
 `Cryptoshop-GUI <https://github.com/Antidote1911/Cryptoshop-GUI>`__ (a
