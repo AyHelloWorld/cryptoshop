@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*-coding:Utf-8 -*
-from __future__ import absolute_import
+
 # Cryptoshop Strong file encryption.
 # Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
@@ -40,6 +40,8 @@ from __future__ import absolute_import
 
 import os
 import sys
+
+
 
 from modules.appversion import version
 from modules.internalkey import encry_decry_internalkey
