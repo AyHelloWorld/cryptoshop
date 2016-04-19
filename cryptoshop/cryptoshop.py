@@ -43,7 +43,7 @@ import sys
 
 
 
-from modules.appversion import version
+from appversion import version
 from modules.internalkey import encry_decry_internalkey
 from modules.nonce import generate_nonce_timestamp
 from tqdm import *
