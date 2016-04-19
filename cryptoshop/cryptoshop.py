@@ -41,14 +41,12 @@
 import os
 import sys
 
-
-
 from appversion import version
-from modules.internalkey import encry_decry_internalkey
-from modules.nonce import generate_nonce_timestamp
+from internalkey import encry_decry_internalkey
+from nonce import generate_nonce_timestamp
 from tqdm import *
 
-from modules.derivation import calc_derivation
+from derivation import calc_derivation
 
 try:
     import botan

@@ -23,8 +23,8 @@
 # ############################################################################
 
 import sys
-from modules import nonce
-from modules.appversion import version
+
+from nonce import generate_nonce_timestamp
 
 try:
     import botan
@@ -44,6 +44,7 @@ def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):
     :param internalkey: the internal key randomly generated in bytes to encrypt or decrypt.
     :param masterkey: a 32 bytes key in bytes.
     :param bool_encry: if bool_encry is True, chunk is encrypted. Else, it will be decrypted.
+    :param assoc_data: Additional data added to GCM authentication.
     :return: if bool_encry is True, corresponding nonce + encryptedkey. Else, the decrypted internal key.
     """
     engine1 = botan.cipher(algo="Serpent/GCM", encrypt=bool_encry)
@@ -68,9 +69,9 @@ def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):
     engine3.set_assoc_data(assoc_data)
 
     if bool_encry is True:
-        nonce1 = nonce.generate_nonce_timestamp()
-        nonce2 = nonce.generate_nonce_timestamp()
-        nonce3 = nonce.generate_nonce_timestamp()
+        nonce1 = generate_nonce_timestamp()
+        nonce2 = generate_nonce_timestamp()
+        nonce3 = generate_nonce_timestamp()
 
         engine1.start(nonce=nonce1)
         engine2.start(nonce=nonce2)
@@ -98,5 +99,3 @@ def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         else:
             return decryptedkey3
-
-

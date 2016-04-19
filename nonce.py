@@ -23,7 +23,7 @@
 # ############################################################################
 
 import uuid
-from modules.appversion import version
+from appversion import version
 
 
 def generate_nonce_timestamp():
