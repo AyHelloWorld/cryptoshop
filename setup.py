@@ -5,12 +5,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='cryptoshop',
-    version='1.1',
+    version='2.0',
     packages=find_packages(),
     author="Fabrice Corraire",
     author_email="antidote1911@gmail.com",
     description="Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.",
-    long_description=open('README.md').read(),
+    long_description=open('readme.rst').read(),
     install_requires= ['tqdm','argon2_cffi'],
     include_package_data=True,
     url='https://github.com/Antidote1911/cryptoshop',

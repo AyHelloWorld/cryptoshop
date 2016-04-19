@@ -1,8 +1,8 @@
 Argon2.license
 MANIFEST.in
-README.md
 botan.license
 cryptoshop.license
+read.md
 setup.py
 cryptoshop/__init__.py
 cryptoshop/cryptoshop.py
