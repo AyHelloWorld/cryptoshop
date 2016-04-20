@@ -169,7 +169,7 @@ More information here:
 Schematic protocol
 ------------------
 
-image::http://img15.hostingpics.net/pics/980644mainwindow.png
+image:: http://img15.hostingpics.net/pics/980644mainwindow.png
 
 Requirement
 -----------
