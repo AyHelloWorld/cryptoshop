@@ -212,8 +212,7 @@ Other resources
 
 You should have some knowledge of cryptography *before* trying to use or
 modify this module. This is an area where it is very easy to make
-mistakes, and where things are often subtle and/or counterintuitive.
-Naive modifications will almost certainly not result in a secure system.
+mistakes. Naive modifications will almost certainly not result in a secure system.
 
 Especially recommended are:
 
