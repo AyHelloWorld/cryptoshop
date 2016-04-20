@@ -147,8 +147,8 @@ chunksize is fixed to 0,5 Mo (500000 bytes)
 
 Authentication is performed internally by GCM mode (the header is always
 included). All chunks of file have a different authentication code and
-all authentication are calculated with the encrypted data. **NOT WITH
-CLEAR DATA.**
+all authentication are calculated with the encrypted data. *NOT WITH
+CLEAR DATA.*
 
 More information here:
 
