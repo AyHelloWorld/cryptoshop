@@ -27,7 +27,7 @@ Or by Pypi, run:
     sudo pip install cryptoshop
 
 Cryptoshop encrypt files with one of this three algorithms in `GCM
-mode <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ -
+mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ -
 `AES-256 <https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>`__
 - `Serpent <https://en.wikipedia.org/wiki/Serpent_%28cipher%29>`__ -
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
