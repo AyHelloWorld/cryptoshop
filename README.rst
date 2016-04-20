@@ -28,8 +28,7 @@ Cryptoshop encrypt files in `GCM
 mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this three algorithms `AES-256 <https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>`__, `Serpent <https://en.wikipedia.org/wiki/Serpent_%28cipher%29>`__ or
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
 
-It use Botan. Crypto and TLS library for C++11. For more information's
-on Botan, go here:
+| It use Botan. Crypto and TLS library for C++11. For more information's on Botan, go here:
 
 | http://botan.randombit.net
 | https://github.com/randombit/botan
