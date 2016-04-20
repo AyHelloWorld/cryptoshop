@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# -*-coding:Utf-8 -*
+# -*- coding: utf-8 -*-
 
 # Cryptoshop Strong file encryption.
-# Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
+# Encrypt and decrypt file in GCM mode with AES, Serpent or Twofish as secure as possible.
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
 
 # ############################################################################
@@ -34,7 +34,7 @@ except ImportError:
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
 
-nonce_length = 19
+nonce_length = 21
 
 
 def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):

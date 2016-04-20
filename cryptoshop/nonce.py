@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# -*-coding:Utf-8 -*
+# -*- coding: utf-8 -*-
 
 # Cryptoshop Strong file encryption.
-# Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
+# Encrypt and decrypt file in GCM mode with AES, Serpent or Twofish as secure as possible.
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
 
 # ############################################################################
@@ -23,11 +23,11 @@
 # ############################################################################
 
 import uuid
-from appversion import version
+from settings import __version__
 
 
 def generate_nonce_timestamp():
     """Generate pseudo-random number and seconds since epoch (UTC)."""
     unique_uuid = uuid.uuid4()
-    nonce = version + unique_uuid.bytes
+    nonce = bytes(__version__.encode('utf-8')) + unique_uuid.bytes
     return nonce

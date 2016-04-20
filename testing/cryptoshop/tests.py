@@ -1,8 +1,8 @@
-#!/usr/bin/env python
-# -*-coding:Utf-8 -*
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 # Cryptoshop Strong file encryption.
-# Encrypt and decrypt file in CTR mode with AES, Serpent or Twofish as secure as possible.
+# Encrypt and decrypt file in GCM mode with AES, Serpent or Twofish as secure as possible.
 # Copyright(C) 2016 CORRAIRE Fabrice. antidote1911@gmail.com
 
 # ############################################################################
@@ -22,9 +22,21 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
-version = b"2.0"
+from cryptoshop import encryptfile
+from cryptoshop import decryptfile
+
+# ------------------------------------------------------------------------------
+# Encrypt test
+# ------------------------------------------------------------------------------
+print("Testing encryption...")
+result = encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
+print(result)
 
 
-def get_version():
-    """Return Cryptoshop version"""
-    return str(version.decode('utf-8'))
+# ------------------------------------------------------------------------------
+# Decrypt test
+# ------------------------------------------------------------------------------
+print("Testing decryption...")
+result2 = decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
+print(result2)
+
