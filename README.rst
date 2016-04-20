@@ -169,7 +169,7 @@ More information here:
 Schematic protocol
 ------------------
 
-image:: doc/protocol.jpg
+.. image:: doc/protocol.jpg
 
 Requirement
 -----------
