@@ -33,7 +33,7 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
 
 It use Botan. Crypto and TLS library for C++11. For more information's
-on Botan, go here:<br/>
+on Botan, go here: <br/>
 http://botan.randombit.net
 
 https://github.com/randombit/botan
