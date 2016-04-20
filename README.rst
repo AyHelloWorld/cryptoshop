@@ -177,9 +177,9 @@ Requirement
    Cryptoshop don't work with the 1.10 branch. The installation include
    the Python wrapper.
 
-Python modules: - `tqdm <https://github.com/tqdm/tqdm>`__ <--- console
-progress-bar - `argon2\_cffi <https://github.com/hynek/argon2_cffi>`__
-<--- Python module/wrapper for Argon2
+Python modules:
+| `tqdm <https://github.com/tqdm/tqdm>`__ <--- console progress-bar
+| `argon2\_cffi <https://github.com/hynek/argon2_cffi>`__ <--- Python module/wrapper for Argon2
 
 License
 -------
