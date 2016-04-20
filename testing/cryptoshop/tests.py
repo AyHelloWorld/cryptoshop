@@ -24,19 +24,48 @@
 
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
-
-# ------------------------------------------------------------------------------
-# Encrypt test
-# ------------------------------------------------------------------------------
-print("Testing encryption...")
-result = encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
-print(result)
+from cryptoshop.nonce import generate_nonce_timestamp
+from cryptoshop.internalkey import encry_decry_internalkey
+import unittest
+import botan
+import argon2
 
 
-# ------------------------------------------------------------------------------
-# Decrypt test
-# ------------------------------------------------------------------------------
-print("Testing decryption...")
-result2 = decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
-print(result2)
+class MyTestCase(unittest.TestCase):
+    @staticmethod
+    def test_nonce():
+        x = 0
+        while x < 1000:
+            generate_nonce_timestamp()
+            x += 1
 
+    @staticmethod
+    def test_argon2():
+        salt = botan.rng().get(256)
+        argon2.low_level.hash_secret_raw((str.encode("my passphrase")), salt=salt, hash_len=32,
+                                         time_cost=2000, memory_cost=1024,
+                                         parallelism=8, type=argon2.low_level.Type.I)
+
+    @staticmethod
+    def test_encrypt():
+        encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
+
+    @staticmethod
+    def test_decrypt():
+        decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
+
+    @staticmethod
+    def test_enc_dec_cascade():
+        key = botan.rng().get(32)
+        key2 = botan.rng().get(32)
+
+        # encryption...
+        encryptedkey = encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=key, masterkey=key2,
+                                               bool_encry=True)
+
+        # decryption
+        encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=encryptedkey, masterkey=key2, bool_encry=False)
+
+
+if __name__ == '__main__':
+    unittest.main()

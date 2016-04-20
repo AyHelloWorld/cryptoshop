@@ -46,6 +46,7 @@ from .settings import __version__
 from .nonce import generate_nonce_timestamp
 from .internalkey import encry_decry_internalkey
 
+
 try:
     import botan
 except:
