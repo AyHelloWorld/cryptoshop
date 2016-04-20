@@ -35,8 +35,7 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this th
 |
 
 
-It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for
-message authentication. For more information's on Argon2, go here:
+| It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for message authentication :
 
 | https://en.wikipedia.org/wiki/Argon2
 | https://www.cryptolux.org/index.php/Argon2
