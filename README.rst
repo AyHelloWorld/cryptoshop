@@ -178,8 +178,8 @@ Requirement
    the Python wrapper.
 
 Python modules:
-| `tqdm <https://github.com/tqdm/tqdm>`__ <--- console progress-bar
-| `argon2\_cffi <https://github.com/hynek/argon2_cffi>`__ <--- Python module/wrapper for Argon2
+| `tqdm <https://github.com/tqdm/tqdm>`__
+| `argon2\_cffi <https://github.com/hynek/argon2_cffi>`__
 
 License
 -------
