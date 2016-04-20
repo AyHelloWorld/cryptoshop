@@ -40,9 +40,7 @@
 
 import os
 import sys
-
 from tqdm import *
-
 from .derivation import calc_derivation
 from .settings import __version__
 from .nonce import generate_nonce_timestamp
