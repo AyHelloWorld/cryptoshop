@@ -35,6 +35,7 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__
 It use Botan. Crypto and TLS library for C++11. For more information's
 on Botan, go here:
 http://botan.randombit.net
+
 https://github.com/randombit/botan
 https://en.wikipedia.org/wiki/Botan\_(programming\_library)
 
