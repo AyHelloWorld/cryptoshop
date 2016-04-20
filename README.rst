@@ -33,8 +33,9 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
 
 It use Botan. Crypto and TLS library for C++11. For more information's
-on Botan, go here: - http://botan.randombit.net -
-https://github.com/randombit/botan -
+on Botan, go here:
+http://botan.randombit.net
+https://github.com/randombit/botan
 https://en.wikipedia.org/wiki/Botan\_(programming\_library)
 
 It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for
