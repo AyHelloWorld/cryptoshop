@@ -39,11 +39,12 @@ on Botan, go here:
 | https://github.com/randombit/botan
 | https://en.wikipedia.org/wiki/Botan\_(programming\_library)
 
-| It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for
-message authentication. For more information's on Argon2: -
-https://en.wikipedia.org/wiki/Argon2 -
-https://www.cryptolux.org/index.php/Argon2 -
-https://github.com/P-H-C/phc-winner-argon2
+
+It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for
+message authentication. For more information's on Argon2, go here:
+| https://en.wikipedia.org/wiki/Argon2
+| https://www.cryptolux.org/index.php/Argon2
+| https://github.com/P-H-C/phc-winner-argon2
 
 Cryptoshop is optimized for large files.
 
