@@ -48,6 +48,7 @@ message authentication. For more information's on Argon2, go here:
 | https://www.cryptolux.org/index.php/Argon2
 | https://github.com/P-H-C/phc-winner-argon2
 
+
 Cryptoshop is optimized for large files.
 
 You can use it like console application:
