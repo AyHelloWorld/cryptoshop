@@ -169,7 +169,7 @@ More information here:
 Schematic protocol
 ------------------
 
-![](http://img15.hostingpics.net/pics/980644mainwindow.png)
+!(http://img15.hostingpics.net/pics/980644mainwindow.png)
 
 Requirement
 -----------
