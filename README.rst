@@ -104,7 +104,7 @@ and you need only to remember your passphrase. Not three 32 bytes keys
 You can encrypt with AES-256, Serpent-256, or Twofish-256. If no
 algorithm is specified, Cryptoshop use Serpent-256.
 
-| Encryption is optimized for larges files:
+| **Encryption is optimized for larges files:**
 The file is encrypted chunk by chunk with the 'internalkey'. Etch iteration is authenticated. All encrypted chunks
 use a different 21 bytes UNIQUES nonce. It is ABSOLUTELY necessary for all counter mode like GCM or CTR...
 `NEVER USE THE SAME KEY WITH THE SAME NONCE <http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf>`__.
