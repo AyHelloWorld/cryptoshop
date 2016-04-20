@@ -48,7 +48,6 @@ message authentication. For more information's on Argon2, go here:
 | https://www.cryptolux.org/index.php/Argon2
 | https://github.com/P-H-C/phc-winner-argon2
 |
-Cryptoshop is optimized for large files.
 
 You can use it like console application:
 
@@ -162,9 +161,9 @@ included). All chunks of file have a different authentication code and
 all authentication are calculated with the encrypted data. NOT WITH
 CLEAR DATA.
 
-More information here: -
-https://en.wikipedia.org/wiki/Galois/Counter\_Mode -
-http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
+More information here:
+| https://en.wikipedia.org/wiki/Galois/Counter\_Mode
+| http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
 
 Schematic protocol
 ------------------
