@@ -23,7 +23,7 @@
 # ############################################################################
 
 import uuid
-from settings import __version__
+from .settings import __version__
 
 
 def generate_nonce_timestamp():
