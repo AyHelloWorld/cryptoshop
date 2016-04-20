@@ -106,10 +106,9 @@ algorithm is specified, Cryptoshop use Serpent-256.
 
 | Encryption is optimized for larges files:
 The file is encrypted chunk by chunk with the 'internalkey'. Etch iteration is authenticated. All encrypted chunks
-use a different 21 bytes UNIQUES nonce. It is ABSOLUTELY necessary for all counter mode like GCM or CTR... `NEVER USE THE SAME KEY WITH THE SAME
-NONCE <http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf>`__.
-For have uniques nonce, cryptoshop use
-`uuid4 <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__,
+use a different 21 bytes UNIQUES nonce. It is ABSOLUTELY necessary for all counter mode like GCM or CTR...
+`NEVER USE THE SAME KEY WITH THE SAME NONCE <http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/ctr/ctr-spec.pdf>`__.
+For have uniques nonce, cryptoshop use `uuid4 <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__,
 and `timestamp <https://en.wikipedia.org/wiki/Timestamp>`__.
 
 The final Cryptoshop format is:
