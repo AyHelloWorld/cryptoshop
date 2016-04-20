@@ -37,7 +37,7 @@ on Botan, go here:
 
 | http://botan.randombit.net
 | https://github.com/randombit/botan
-| https://en.wikipedia.org/wiki/Botan\_(programming\_library) /n
+| https://en.wikipedia.org/wiki/Botan\_(programming\_library) |
 
 
 
