@@ -162,6 +162,7 @@ all authentication are calculated with the encrypted data. NOT WITH
 CLEAR DATA.
 
 More information here:
+
 | https://en.wikipedia.org/wiki/Galois/Counter\_Mode
 | http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
 
