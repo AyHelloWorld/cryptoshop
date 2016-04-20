@@ -222,8 +222,7 @@ If you're doing something non-trivial or unique, you might want to at
 the very least ask for review/input on a mailing list such as the
 `metzdowd <http://www.metzdowd.com/mailman/listinfo/cryptography>`__ or
 `randombit <http://lists.randombit.net/mailman/listinfo/cryptography>`__
-crypto lists. And (if possible) pay a professional cryptographer or
-security company to review your design and code.
+crypto lists.
 
 | http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf
 | http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
