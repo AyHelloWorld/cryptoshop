@@ -75,9 +75,12 @@ def encryptstring(string, masterkey, assoc_data, bool_encry):
         engine3.start(nonce=nonce3)
 
         decryptedstring1 = engine3.finish(encryptedstring)
+        if decryptedstring1 == b"":
+            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         decryptedstring2 = engine2.finish(decryptedstring1)
+        if decryptedstring2 == b"":
+            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         decryptedstring3 = engine1.finish(decryptedstring2)
-
         if decryptedstring3 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         else:
