@@ -73,7 +73,7 @@ def encryptstring(string, passphrase):
     salt = botan.rng().get(salt_size)
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
-    out = encry_decry_cascade(internalkey=string, masterkey=key, bool_encry=True, assoc_data=header)
+    out = encry_decry_cascade(data=string, masterkey=key, bool_encry=True, assoc_data=header)
     return header + salt + out
 
 
@@ -83,7 +83,7 @@ def decryptstring(string, passphrase):
     encryptedstring = string[header_length + salt_size:]
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
-    out = encry_decry_cascade(internalkey=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
+    out = encry_decry_cascade(data=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
     return out.decode('utf-8')
 
 
@@ -143,7 +143,7 @@ def encryptfile(filename, passphrase, algo='srp'):
         masterkey = calc_derivation(passphrase=passphrase, salt=salt)
 
         # Encrypt internal key...
-        encrypted_key = encry_decry_cascade(internalkey=internal_key, masterkey=masterkey,
+        encrypted_key = encry_decry_cascade(data=internal_key, masterkey=masterkey,
                                             bool_encry=True,
                                             assoc_data=header + salt)
         with open(filename, 'rb') as filestream:
@@ -200,7 +200,7 @@ def decryptfile(filename, passphrase):
 
             # Decrypt internal key...
             try:
-                internal_key = encry_decry_cascade(internalkey=encrypted_key, masterkey=masterkey,
+                internal_key = encry_decry_cascade(data=encrypted_key, masterkey=masterkey,
                                                    bool_encry=False, assoc_data=fileheader + salt)
             except Exception as e:
                 return e

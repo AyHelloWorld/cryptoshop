@@ -37,15 +37,15 @@ except ImportError:
 nonce_length = 21
 
 
-def encry_decry_cascade(internalkey, masterkey, bool_encry, assoc_data):
+def encry_decry_cascade(data, masterkey, bool_encry, assoc_data):
     """
-    When bool_encry is True, encrypt the internal key with master key. When it is False, the function extract the nonce
-    from the encrypted key (first 21 bytes), and decrypt the internal key.
-    :param internalkey: the internal key randomly generated in bytes to encrypt or decrypt.
+    When bool_encry is True, encrypt the data with master key. When it is False, the function extract the three nonce
+    from the encrypted data (first 3*21 bytes), and decrypt the data.
+    :param data: the data to encrypt or decrypt.
     :param masterkey: a 32 bytes key in bytes.
-    :param bool_encry: if bool_encry is True, chunk is encrypted. Else, it will be decrypted.
+    :param bool_encry: if bool_encry is True, data is encrypted. Else, it will be decrypted.
     :param assoc_data: Additional data added to GCM authentication.
-    :return: if bool_encry is True, corresponding nonce + encryptedkey. Else, the decrypted internal key.
+    :return: if bool_encry is True, corresponding nonce + encrypted data. Else, the decrypted data.
     """
     engine1 = botan.cipher(algo="Serpent/GCM", encrypt=bool_encry)
     engine2 = botan.cipher(algo="AES-256/GCM", encrypt=bool_encry)
@@ -77,28 +77,28 @@ def encry_decry_cascade(internalkey, masterkey, bool_encry, assoc_data):
         engine2.start(nonce=nonce2)
         engine3.start(nonce=nonce3)
 
-        key1 = engine1.finish(internalkey)
-        key2 = engine2.finish(key1)
-        key3 = engine3.finish(key2)
-        return nonce1 + nonce2 + nonce3 + key3
+        cipher1 = engine1.finish(data)
+        cipher2 = engine2.finish(cipher1)
+        cipher3 = engine3.finish(cipher2)
+        return nonce1 + nonce2 + nonce3 + cipher3
     else:
-        nonce1 = internalkey[:nonce_length]
-        nonce2 = internalkey[nonce_length:nonce_length * 2]
-        nonce3 = internalkey[nonce_length * 2:nonce_length * 3]
-        encryptedkey = internalkey[nonce_length * 3:]
+        nonce1 = data[:nonce_length]
+        nonce2 = data[nonce_length:nonce_length * 2]
+        nonce3 = data[nonce_length * 2:nonce_length * 3]
+        encrypteddata = data[nonce_length * 3:]
 
         engine1.start(nonce=nonce1)
         engine2.start(nonce=nonce2)
         engine3.start(nonce=nonce3)
 
-        decryptedkey1 = engine3.finish(encryptedkey)
-        if decryptedkey1 == b"":
+        decrypteddata1 = engine3.finish(encrypteddata)
+        if decrypteddata1 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        decryptedkey2 = engine2.finish(decryptedkey1)
-        if decryptedkey2 == b"":
+        decrypteddata2 = engine2.finish(decrypteddata1)
+        if decrypteddata2 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        decryptedkey3 = engine1.finish(decryptedkey2)
-        if decryptedkey3 == b"":
+        decrypteddata3 = engine1.finish(decrypteddata2)
+        if decrypteddata3 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         else:
-            return decryptedkey3
+            return decrypteddata3
