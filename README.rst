@@ -32,7 +32,6 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this th
 `<http://botan.randombit.net>`_ and `<https://github.com/randombit/botan>`_
 
 
-
 It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for message authentication :
 
 https://en.wikipedia.org/wiki/Argon2
@@ -171,7 +170,7 @@ More information here:
 Schematic file encryption protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: doc/protocol.jpg
+.. image:: http://img15.hostingpics.net/pics/149103protocol.jpg
 
 Notes on string encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
