@@ -24,7 +24,7 @@
 
 import uuid
 import cryptoshop._settings
-#version = b"2.0.0"
+
 nonce_length = 21  # in bytes (168 bits).
 
 

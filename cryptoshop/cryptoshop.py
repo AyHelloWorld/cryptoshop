@@ -46,8 +46,7 @@ from ._cascade_engine import encry_decry_cascade
 from ._derivation_engine import calc_derivation
 from ._chunk_engine import encry_decry_chunk
 from ._nonce_engine import nonce_length
-from ._settings import __version__
-
+from ._settings import __version__, __chunk_size__
 
 try:
     import botan
@@ -59,7 +58,6 @@ except:
 
 b_version = bytes(__version__.encode('utf-8'))
 salt_size = 512  # in bits.(64 bytes)
-chunk_size = 5000000  # in bytes. (0.5 Mo)
 
 # ------------------------------------------------------------------------------
 # Constant variables
@@ -137,10 +135,10 @@ def encryptfile(filename, passphrase, algo='srp'):
                 file_size = os.stat(filename).st_size
                 finished = False
                 # the maximum of the progress bar is the total chunk to process. It's files_size // chunk_size
-                bar = tqdm(range(file_size // chunk_size))
+                bar = tqdm(range(file_size // __chunk_size__))
                 while not finished:
-                    chunk = filestream.read(chunk_size)
-                    if len(chunk) == 0 or len(chunk) % chunk_size != 0:
+                    chunk = filestream.read(__chunk_size__)
+                    if len(chunk) == 0 or len(chunk) % __chunk_size__ != 0:
                         finished = True
                     # An encrypted-chunk output is nonce, gcmtag, and cipher-chunk concatenation.
                     encryptedchunk = encry_decry_chunk(chunk=chunk, key=internal_key, bool_encry=True,
@@ -192,10 +190,10 @@ def decryptfile(filename, passphrase):
                 files_size = os.stat(filename).st_size
 
                 # the maximum of the progress bar is the total chunk to process. It's files_size // chunk_size
-                bar = tqdm(range(files_size // chunk_size))
+                bar = tqdm(range(files_size // __chunk_size__))
                 while True:
                     # Don't forget... an encrypted chunk is nonce, gcmtag, and cipher-chunk concatenation.
-                    encryptedchunk = filestream.read(nonce_length + gcmtag + chunk_size)
+                    encryptedchunk = filestream.read(nonce_length + gcmtag + __chunk_size__)
                     if len(encryptedchunk) == 0:
                         break
 
