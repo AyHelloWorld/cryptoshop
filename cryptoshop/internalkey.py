@@ -40,7 +40,7 @@ nonce_length = 21
 def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):
     """
     When bool_encry is True, encrypt the internal key with master key. When it is False, the function extract the nonce
-    from the encrypted key (first 19 bytes), and decrypt the internal key.
+    from the encrypted key (first 21 bytes), and decrypt the internal key.
     :param internalkey: the internal key randomly generated in bytes to encrypt or decrypt.
     :param masterkey: a 32 bytes key in bytes.
     :param bool_encry: if bool_encry is True, chunk is encrypted. Else, it will be decrypted.

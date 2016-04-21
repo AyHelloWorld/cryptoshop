@@ -27,7 +27,7 @@ from .settings import __version__
 
 
 def generate_nonce_timestamp():
-    """Generate pseudo-random number and seconds since epoch (UTC)."""
+    """Generate unique nonce with uuid timestamp (UTC)."""
     unique_uuid = uuid.uuid4()
     nonce = bytes(__version__.encode('utf-8')) + unique_uuid.bytes
     return nonce

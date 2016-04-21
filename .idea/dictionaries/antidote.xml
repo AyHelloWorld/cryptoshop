@@ -2,6 +2,7 @@
   <dictionary name="antidote">
     <words>
       <w>decryptedchunk</w>
+      <w>encryptedkey</w>
       <w>encryptstring</w>
       <w>gcmtag</w>
       <w>internalkey</w>
