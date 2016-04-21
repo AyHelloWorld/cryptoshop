@@ -24,16 +24,25 @@
 
 """
     Cryptoshop implementation.
-    Encrypt and decrypt file in GCM mode with AES, Serpent or Twofish as secure as possible.
+    Encrypt and decrypt file or string in GCM mode with AES, Serpent or Twofish as secure as possible.
 
     Usage:
     from cryptoshop import encryptfile
     from cryptoshop import decryptfile
+    from cryptoshop import encryptstring
+    from cryptoshop import decryptstring
 
-    result1 = encryptfile(filename="test", passphrase="mypassword", algo="srp")
+    result1 = encryptfile(filename= "test" , passphrase= "mypassword" , algo= "srp")
     print(result1)
 
-    result2 = decryptfile(filename="test.cryptoshop", passphrase="mypassword")
+    result2 = decryptfile(filename= "test.cryptoshop" , passphrase= "mypassword")
+    print(result2)
+
+    # For string encryption, no need to specify algo. Cryptoshop use cascade encryption with Serpent, AES, Twofish.
+    result3 = encryptstring(string= "my string to encrypt" , passphrase= "mypassword")
+    print(result1)
+
+    result4 = decryptstring(string= result3 , passphrase= "mypassword")
     print(result2)
 
 """
