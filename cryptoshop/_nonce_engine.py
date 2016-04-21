@@ -25,8 +25,6 @@
 import uuid
 import cryptoshop._settings
 
-nonce_length = 21  # in bytes (168 bits).
-
 
 def generate_nonce_timestamp():
     """Generate unique nonce with uuid timestamp (UTC)."""

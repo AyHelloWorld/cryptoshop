@@ -23,6 +23,7 @@
 # ############################################################################
 
 import sys
+
 try:
     import botan
 except:
@@ -31,8 +32,8 @@ except:
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
 
-from ._nonce_engine import generate_nonce_timestamp, nonce_length
-from ._settings import __chunk_size__ , __gcmtag_length__
+from ._nonce_engine import generate_nonce_timestamp
+from ._settings import __chunk_size__, __gcmtag_length__, __nonce_length__
 
 
 def encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
@@ -54,8 +55,8 @@ def encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
         engine.start(nonce=nonce)
         return nonce + engine.finish(chunk)
     else:
-        nonce = chunk[:nonce_length]
-        encryptedchunk = chunk[nonce_length:nonce_length + __gcmtag_length__ + __chunk_size__]
+        nonce = chunk[:__nonce_length__]
+        encryptedchunk = chunk[__nonce_length__:__nonce_length__ + __gcmtag_length__ + __chunk_size__]
         engine.start(nonce=nonce)
         decryptedchunk = engine.finish(encryptedchunk)
         if decryptedchunk == b"":

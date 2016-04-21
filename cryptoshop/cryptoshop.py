@@ -45,8 +45,7 @@ from tqdm import *
 from ._cascade_engine import encry_decry_cascade
 from ._derivation_engine import calc_derivation
 from ._chunk_engine import encry_decry_chunk
-from ._nonce_engine import nonce_length
-from ._settings import __version__, __chunk_size__, __gcmtag_length__
+from ._settings import __version__, __chunk_size__, __gcmtag_length__, __salt_size__, __nonce_length__
 
 try:
     import botan
@@ -57,7 +56,6 @@ except:
     sys.exit(0)
 
 b_version = bytes(__version__.encode('utf-8'))
-salt_size = 512  # in bits.(64 bytes)
 
 # ------------------------------------------------------------------------------
 # Constant variables
@@ -73,7 +71,7 @@ header_length = 20  # in bits (2.5 bytes)
 
 def encryptstring(string, passphrase):
     header = b"Cryptoshop str " + b_version
-    salt = botan.rng().get(salt_size)
+    salt = botan.rng().get(__salt_size__)
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=string, masterkey=key, bool_encry=True, assoc_data=header)
@@ -82,8 +80,8 @@ def encryptstring(string, passphrase):
 
 def decryptstring(string, passphrase):
     header = string[:header_length]
-    salt = string[header_length:salt_size + header_length]
-    encryptedstring = string[header_length + salt_size:]
+    salt = string[header_length:__salt_size__ + header_length]
+    encryptedstring = string[header_length + __salt_size__:]
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
@@ -119,7 +117,7 @@ def encryptfile(filename, passphrase, algo='srp'):
         internal_key = botan.rng().get(internal_key_length)
 
         # Passphrase derivation...
-        salt = botan.rng().get(salt_size)
+        salt = botan.rng().get(__salt_size__)
         masterkey = calc_derivation(passphrase=passphrase, salt=salt)
 
         # Encrypt internal key...
@@ -172,7 +170,7 @@ def decryptfile(filename, passphrase):
             if fileheader != b"Cryptoshop srp " + b_version and fileheader != b"Cryptoshop aes " + b_version and fileheader != b"Cryptoshop twf " + b_version:
                 return "Error: Bad header"
 
-            salt = filestream.read(salt_size)
+            salt = filestream.read(__salt_size__)
             encrypted_key = filestream.read(encrypted_key_length)
 
             # Derive the passphrase...
@@ -192,7 +190,7 @@ def decryptfile(filename, passphrase):
                 bar = tqdm(range(files_size // __chunk_size__))
                 while True:
                     # Don't forget... an encrypted chunk is nonce, gcmtag, and cipher-chunk concatenation.
-                    encryptedchunk = filestream.read(nonce_length + __gcmtag_length__ + __chunk_size__)
+                    encryptedchunk = filestream.read(__nonce_length__ + __gcmtag_length__ + __chunk_size__)
                     if len(encryptedchunk) == 0:
                         break
 

@@ -25,7 +25,7 @@
 import sys
 
 from ._nonce_engine import generate_nonce_timestamp
-from ._nonce_engine import nonce_length
+from ._settings import __nonce_length__
 
 try:
     import botan
@@ -81,10 +81,10 @@ def encry_decry_cascade(data, masterkey, bool_encry, assoc_data):
         cipher3 = engine3.finish(cipher2)
         return nonce1 + nonce2 + nonce3 + cipher3
     else:
-        nonce1 = data[:nonce_length]
-        nonce2 = data[nonce_length:nonce_length * 2]
-        nonce3 = data[nonce_length * 2:nonce_length * 3]
-        encrypteddata = data[nonce_length * 3:]
+        nonce1 = data[:__nonce_length__]
+        nonce2 = data[__nonce_length__:__nonce_length__ * 2]
+        nonce3 = data[__nonce_length__ * 2:__nonce_length__ * 3]
+        encrypteddata = data[__nonce_length__ * 3:]
 
         engine1.start(nonce=nonce1)
         engine2.start(nonce=nonce2)
