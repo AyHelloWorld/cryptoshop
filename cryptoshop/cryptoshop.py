@@ -46,7 +46,7 @@ from ._cascade_engine import encry_decry_cascade
 from ._derivation_engine import calc_derivation
 from ._chunk_engine import encry_decry_chunk
 from ._nonce_engine import nonce_length
-from ._settings import version
+from ._settings import __version__
 
 
 try:
@@ -57,7 +57,7 @@ except:
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
 
-b_version = bytes(version.encode('utf-8'))
+b_version = bytes(__version__.encode('utf-8'))
 salt_size = 512  # in bits.(64 bytes)
 chunk_size = 5000000  # in bytes. (0.5 Mo)
 
