@@ -50,6 +50,8 @@
 import os
 import sys
 from tqdm import *
+import getpass
+import argparse
 
 from ._cascade_engine import encry_decry_cascade
 from ._derivation_engine import calc_derivation
@@ -221,3 +223,46 @@ def decryptfile(filename, passphrase):
 
 def get_version():
     return __version__
+
+
+# ./cryptoshop.py -e test -a aes         if no algo specified, Serpent (srp) is default.
+# ./cryptoshop.py -d test.cryptoshop     no need to specify algo. It is detected by decryption routine.
+
+def main():
+    # parse command line arguments...
+    parser = argparse.ArgumentParser(description="Encrypt or decrypt a file with Serpent-256, AES-256 or Twofish-256")
+    parser.add_argument("filename", type=str,
+                        help="file to encrypt or decrypt")
+    parser.add_argument("-a", "--algo", type=str,
+                        default="srp",
+                        help="specify algo. Can be srp, aes or twf. Default is srp. Not used for decrypt.")
+
+    # encrypt or decrypt...
+    grouped = parser.add_mutually_exclusive_group(required=True)
+    grouped.add_argument("-e", "--encrypt",
+                         help="encrypt file", action="store_true")
+    grouped.add_argument("-d", "--decrypt",
+                         help="decrypt file", action="store_true")
+    args = parser.parse_args()
+    filename = args.filename
+
+    if args.encrypt:
+        algo = args.algo
+
+        passw = str(getpass.getpass("Password:"))
+        passw_conf = str(getpass.getpass("Confirm password:"))
+
+        # check if second pass is the same as first entry pass...
+        if passw != passw_conf:
+            exit("Error: passwords you provided do not match")
+        result = encryptfile(filename=filename, passphrase=passw, algo=algo)
+        print(result)
+
+    elif args.decrypt:
+        passw = str(getpass.getpass("Password:"))
+        result = decryptfile(filename=filename, passphrase=passw)
+        print(result)
+
+
+if __name__ == '__main__':
+    sys.exit(main() or 0)
