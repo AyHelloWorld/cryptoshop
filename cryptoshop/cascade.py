@@ -25,6 +25,7 @@
 import sys
 
 from .nonce import generate_nonce_timestamp
+from .nonce import nonce_length
 
 try:
     import botan
@@ -33,8 +34,6 @@ except ImportError:
     print("http://botan.randombit.net/#download")
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
-
-nonce_length = 21
 
 
 def encry_decry_cascade(data, masterkey, bool_encry, assoc_data):
