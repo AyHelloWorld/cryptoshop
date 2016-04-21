@@ -6,7 +6,7 @@ A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, S
 Contact: antidote1911@gmail.com
 
 General Specifications :
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 To install with sources archive, go in the extracted folder and run in
 terminal:
