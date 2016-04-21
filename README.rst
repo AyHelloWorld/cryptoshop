@@ -6,7 +6,7 @@ A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, S
 Contact: antidote1911@gmail.com
 
 General Specifications :
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 To install with sources archive, go in the extracted folder and run in
 terminal:
@@ -25,13 +25,13 @@ Cryptoshop encrypt files in `GCM
 mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this three algorithms `AES-256 <https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>`__, `Serpent <https://en.wikipedia.org/wiki/Serpent_%28cipher%29>`__ or
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
 
-For string encryption, cryptoshop use cascade encryption with Serpent, AES and Twofish.
+* For string encryption, cryptoshop use cascade encryption with Serpent, AES and Twofish.
 
-| It use Botan. Crypto and TLS library for C++11. For more information's on Botan, go here:
+* It use Botan. Crypto and TLS library for C++11. For more information's on Botan, go here:
 
-| http://botan.randombit.net
-| https://github.com/randombit/botan
-|
+http://botan.randombit.net
+https://github.com/randombit/botan
+
 
 
 | It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for message authentication :
