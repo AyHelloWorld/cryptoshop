@@ -1,7 +1,7 @@
 Cryptoshop
 ==========
 
-| A Python 3 module to encrypt and decrypt files in GCM mode with AES, Serpent or Twofish as secure as possible.
+| A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, Serpent or Twofish as secure as possible.
 Contact: antidote1911@gmail.com
 
 Cryptoshop is the crypto module of
@@ -27,6 +27,8 @@ Or by Pypi, run:
 Cryptoshop encrypt files in `GCM
 mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this three algorithms `AES-256 <https://en.wikipedia.org/wiki/Advanced_Encryption_Standard>`__, `Serpent <https://en.wikipedia.org/wiki/Serpent_%28cipher%29>`__ or
 `Twofish <https://en.wikipedia.org/wiki/Twofish>`__
+
+For string encryption, cryptoshop use cascade encryption with Serpent, AES and Twofish.
 
 | It use Botan. Crypto and TLS library for C++11. For more information's on Botan, go here:
 
