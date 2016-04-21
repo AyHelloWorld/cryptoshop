@@ -208,3 +208,7 @@ def decryptfile(filename, passphrase):
 
     except IOError:
         exit("Error: file \"" + filename + "\" was not found.")
+
+
+def get_version():
+    return __version__
