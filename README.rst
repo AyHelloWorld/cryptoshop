@@ -1,7 +1,8 @@
+==========
 Cryptoshop
 ==========
 
-| A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, Serpent or Twofish as secure as possible.
+A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, Serpent or Twofish as secure as possible.
 Contact: antidote1911@gmail.com
 
 General Specifications :
