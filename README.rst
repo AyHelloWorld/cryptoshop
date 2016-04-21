@@ -150,8 +150,8 @@ The final Cryptoshop format is:
 
 chunksize is fixed to 0,5 Mo (500000 bytes)
 
-3- Decryption :
-~~~~~~~~~~~~~~~
+3- File Decryption :
+~~~~~~~~~~~~~~~~~~~~
 
 -  The decryption routine check the header before all other operations.
 -  The internalkey is decrypted, and authentication is checked.
@@ -171,10 +171,15 @@ More information here:
 | https://en.wikipedia.org/wiki/Galois/Counter\_Mode
 | http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
 
-Schematic protocol
-------------------
+Schematic file encryption protocol
+----------------------------------
 
 .. image:: doc/protocol.jpg
+
+Notes on string encryption
+--------------------------
+There is no "chunk" concept with string encryption. String encryption always use cascade encryption. The header and
+encrypted string are authenticated.
 
 Requirement
 -----------
