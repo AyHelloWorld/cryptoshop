@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 __author__ = 'Fabrice Corraire'
 
 main_namespace = {}
-with open('cryptoshop/settings.py') as version_file:
+with open('cryptoshop/_settings.py') as version_file:
     exec(version_file.read(), main_namespace)
 version = main_namespace['__version__']
 
