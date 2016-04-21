@@ -76,6 +76,7 @@ File encryption :
     result2 = decryptfile(filename="test.cryptoshop", passphrase="mypassphrase")
     print(result2)
 
+String encryption :
 ::
 
     from cryptoshop import encryptstring
