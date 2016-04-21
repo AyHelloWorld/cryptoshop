@@ -82,7 +82,7 @@ String encryption :
     from cryptoshop import encryptstring
     from cryptoshop import decryptstring
 
-    # For string encryption, no need to specify algo. Cryptoshop use cascade encryption with Serpent, AES and Twofish.
+    # No need to specify algo. Cryptoshop use cascade encryption with Serpent, AES and Twofish.
     result1 = encryptstring(string= "my string to encrypt" , passphrase= "mypassword")
     print(result1)
 
