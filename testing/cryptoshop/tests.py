@@ -22,19 +22,20 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
+
+from cryptoshop.nonce import generate_nonce_timestamp
+from cryptoshop import encryptstring
+from cryptoshop import decryptstring
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
-from cryptoshop import string_encrypt
-from cryptoshop import string_decrypt
-from cryptoshop.nonce import generate_nonce_timestamp
-from cryptoshop.internalkey import encry_decry_internalkey
+
+
 import unittest
-import botan
 
 
 class MyTestCase(unittest.TestCase):
     @staticmethod
-    def test_nonce():
+    def test_nonce_generating():
         x = 0
         while x < 100:
             generate_nonce_timestamp()
@@ -44,26 +45,15 @@ class MyTestCase(unittest.TestCase):
     def test_enc_dec_string():
 
         # encrypt
-        cryptostring = string_encrypt(string="my super secret text to encrypt", passphrase="my passphrase")
+        cryptostring = encryptstring(string="my super secret text to encrypt", passphrase="my passphrase")
 
         # decrypt
-        decrypted = string_decrypt(string=cryptostring, passphrase="my passphrase")
+        decryptstring(string=cryptostring, passphrase="my passphrase")
 
     @staticmethod
     def test_enc_dec_file():
         encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
         decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
-
-    @staticmethod
-    def test_enc_dec_cascade():
-        key = botan.rng().get(32)
-        key2 = botan.rng().get(32)
-
-        # encryption...
-        encryptedkey = encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=key, masterkey=key2,
-                                               bool_encry=True)
-        # decryption
-        encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=encryptedkey, masterkey=key2, bool_encry=False)
 
 
 if __name__ == '__main__':

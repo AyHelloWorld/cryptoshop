@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Cryptoshop Strong file encryption.
@@ -22,13 +22,31 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
-import botan
+import sys
+
 from .nonce import generate_nonce_timestamp
+
+try:
+    import botan
+except ImportError:
+    print("Please install the last version of Botan crypto library.")
+    print("http://botan.randombit.net/#download")
+    print("For Linux users, try to find it in your package manager.")
+    sys.exit(0)
 
 nonce_length = 21
 
 
-def encrypt_string(string, masterkey, header, bool_encry):
+def encry_decry_cascade(internalkey, masterkey, bool_encry, assoc_data):
+    """
+    When bool_encry is True, encrypt the internal key with master key. When it is False, the function extract the nonce
+    from the encrypted key (first 21 bytes), and decrypt the internal key.
+    :param internalkey: the internal key randomly generated in bytes to encrypt or decrypt.
+    :param masterkey: a 32 bytes key in bytes.
+    :param bool_encry: if bool_encry is True, chunk is encrypted. Else, it will be decrypted.
+    :param assoc_data: Additional data added to GCM authentication.
+    :return: if bool_encry is True, corresponding nonce + encryptedkey. Else, the decrypted internal key.
+    """
     engine1 = botan.cipher(algo="Serpent/GCM", encrypt=bool_encry)
     engine2 = botan.cipher(algo="AES-256/GCM", encrypt=bool_encry)
     engine3 = botan.cipher(algo="Twofish/GCM", encrypt=bool_encry)
@@ -42,13 +60,13 @@ def encrypt_string(string, masterkey, header, bool_encry):
     hashed2 = hash2.final()
 
     engine1.set_key(key=masterkey)
-    engine1.set_assoc_data(header)
+    engine1.set_assoc_data(assoc_data)
 
     engine2.set_key(key=hashed1)
-    engine2.set_assoc_data(header)
+    engine2.set_assoc_data(assoc_data)
 
     engine3.set_key(key=hashed2)
-    engine3.set_assoc_data(header)
+    engine3.set_assoc_data(assoc_data)
 
     if bool_encry is True:
         nonce1 = generate_nonce_timestamp()
@@ -59,28 +77,28 @@ def encrypt_string(string, masterkey, header, bool_encry):
         engine2.start(nonce=nonce2)
         engine3.start(nonce=nonce3)
 
-        encrypted1 = engine1.finish(string)
-        encrypted2 = engine2.finish(encrypted1)
-        encrypted3 = engine3.finish(encrypted2)
-        return nonce1 + nonce2 + nonce3 + encrypted3
+        key1 = engine1.finish(internalkey)
+        key2 = engine2.finish(key1)
+        key3 = engine3.finish(key2)
+        return nonce1 + nonce2 + nonce3 + key3
     else:
-        nonce1 = string[:nonce_length]
-        nonce2 = string[nonce_length:nonce_length * 2]
-        nonce3 = string[nonce_length * 2:nonce_length * 3]
-        encryptedstring = string[nonce_length * 3:]
+        nonce1 = internalkey[:nonce_length]
+        nonce2 = internalkey[nonce_length:nonce_length * 2]
+        nonce3 = internalkey[nonce_length * 2:nonce_length * 3]
+        encryptedkey = internalkey[nonce_length * 3:]
 
         engine1.start(nonce=nonce1)
         engine2.start(nonce=nonce2)
         engine3.start(nonce=nonce3)
 
-        decryptedstring1 = engine3.finish(encryptedstring)
-        if decryptedstring1 == b"":
+        decryptedkey1 = engine3.finish(encryptedkey)
+        if decryptedkey1 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        decryptedstring2 = engine2.finish(decryptedstring1)
-        if decryptedstring2 == b"":
+        decryptedkey2 = engine2.finish(decryptedkey1)
+        if decryptedkey2 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        decryptedstring3 = engine1.finish(decryptedstring2)
-        if decryptedstring3 == b"":
+        decryptedkey3 = engine1.finish(decryptedkey2)
+        if decryptedkey3 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         else:
-            return decryptedstring3
+            return decryptedkey3

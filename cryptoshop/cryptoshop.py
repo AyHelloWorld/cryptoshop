@@ -44,8 +44,7 @@ from tqdm import *
 from .derivation import calc_derivation
 from .settings import __version__
 from .nonce import generate_nonce_timestamp
-from .internalkey import encry_decry_internalkey
-from .stringencrypt import encrypt_string
+from .cascade import encry_decry_cascade
 
 try:
     import botan
@@ -69,22 +68,22 @@ encrypted_key_length = 143  # in bytes (1144 bits)
 header_length = 20  # in bits (2.5 bytes)
 
 
-def string_encrypt(string, passphrase):
+def encryptstring(string, passphrase):
     header = b"Cryptoshop str " + version
     salt = botan.rng().get(salt_size)
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
-    out = encrypt_string(string=string, masterkey=key, header=header, bool_encry=True)
+    out = encry_decry_cascade(internalkey=string, masterkey=key, bool_encry=True, assoc_data=header)
     return header + salt + out
 
 
-def string_decrypt(string, passphrase):
+def decryptstring(string, passphrase):
     header = string[:header_length]
-    salt = string[header_length:salt_size+header_length]
-    encryptedstring = string[header_length+salt_size:]
+    salt = string[header_length:salt_size + header_length]
+    encryptedstring = string[header_length + salt_size:]
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
-    out = encrypt_string(string=encryptedstring, masterkey=key, header=header, bool_encry=False)
+    out = encry_decry_cascade(internalkey=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
     return out.decode('utf-8')
 
 
@@ -144,9 +143,9 @@ def encryptfile(filename, passphrase, algo='srp'):
         masterkey = calc_derivation(passphrase=passphrase, salt=salt)
 
         # Encrypt internal key...
-        encrypted_key = encry_decry_internalkey(internalkey=internal_key, masterkey=masterkey,
-                                                bool_encry=True,
-                                                assoc_data=header + salt)
+        encrypted_key = encry_decry_cascade(internalkey=internal_key, masterkey=masterkey,
+                                            bool_encry=True,
+                                            assoc_data=header + salt)
         with open(filename, 'rb') as filestream:
             with open(str(outname), 'wb') as filestreamout:
                 filestreamout.write(header)
@@ -201,8 +200,8 @@ def decryptfile(filename, passphrase):
 
             # Decrypt internal key...
             try:
-                internal_key = encry_decry_internalkey(internalkey=encrypted_key, masterkey=masterkey,
-                                                       bool_encry=False, assoc_data=fileheader + salt)
+                internal_key = encry_decry_cascade(internalkey=encrypted_key, masterkey=masterkey,
+                                                   bool_encry=False, assoc_data=fileheader + salt)
             except Exception as e:
                 return e
 
