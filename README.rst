@@ -87,7 +87,7 @@ String encryption :
     print(result2)
 
 Advanced Specifications :
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1- Key derivation/stretching :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,17 +169,17 @@ More information here:
 | http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-spec.pdf
 
 Schematic file encryption protocol
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: doc/protocol.jpg
 
 Notes on string encryption
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 There is no "chunk" concept with string encryption. String encryption always use cascade encryption. The header and
 encrypted string are authenticated.
 
 Requirement
------------
+~~~~~~~~~~~
 
 -  Python >= 3
 -  Botan library >=1.11 <--- Install the last version (1.11.29).
@@ -192,7 +192,7 @@ Python modules:
 - `argon2\_cffi <https://github.com/hynek/argon2_cffi>`__ <--- Python module/wrapper for Argon2
 
 License
--------
+~~~~~~~
 
 -  Cryptoshop is released under
    `GPL3 <https://github.com/Antidote1911/cryptoshop/blob/master/cryptoshop.license>`__
@@ -204,7 +204,7 @@ License
    License
 
 Why Cryptoshop ?
-----------------
+~~~~~~~~~~~~~~~~
 
 There is a lot of bad encryption modules for python.
 
@@ -217,7 +217,7 @@ There is a lot of bad encryption modules for python.
 - No optimization for big files.
 
 Other resources
----------------
+~~~~~~~~~~~~~~~
 
 You should have some knowledge of cryptography *before* trying to use or
 modify this module. This is an area where it is very easy to make
