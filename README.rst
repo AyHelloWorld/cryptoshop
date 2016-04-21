@@ -4,10 +4,6 @@ Cryptoshop
 | A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, Serpent or Twofish as secure as possible.
 Contact: antidote1911@gmail.com
 
-Cryptoshop is the crypto module of
-`Cryptoshop-GUI <https://github.com/Antidote1911/Cryptoshop-GUI>`__ (a
-Qt5 application for use this module and GnuPG graphically.
-
 General Specifications :
 ------------------------
 
