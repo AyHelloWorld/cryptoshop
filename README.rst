@@ -64,6 +64,7 @@ Linux users: Make a symlink of the module on your bin folder...
 
 You can use it like a module for your Python application:
 
+File encryption :
 ::
 
     from cryptoshop import encryptfile
