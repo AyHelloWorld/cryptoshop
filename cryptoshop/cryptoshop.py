@@ -38,12 +38,12 @@
     result2 = decryptfile(filename= "test.cryptoshop" , passphrase= "mypassword")
     print(result2)
 
-    # For string encryption, no need to specify algo. Cryptoshop use cascade encryption with Serpent, AES, Twofish.
+    # For string encryption, no need to specify algo. Cryptoshop use cascade encryption with Serpent, AES and Twofish.
     result3 = encryptstring(string= "my string to encrypt" , passphrase= "mypassword")
-    print(result1)
+    print(result3)
 
     result4 = decryptstring(string= result3 , passphrase= "mypassword")
-    print(result2)
+    print(result4)
 
 """
 
