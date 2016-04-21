@@ -22,14 +22,19 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
-import uuid
-from .settings import __version__
 
-nonce_length = 21  # in bytes (168 bits).
+# ------------------------------------------------------------------------------
+# Application General
+# ------------------------------------------------------------------------------
+__app_name__ = 'cryptoshop'
+__author__ = 'Fabrice Corraire'
+__email__ = "antidote1911@gmail.com"
+__website__ = "https://github.com/Antidote1911/cryptoshop"
 
-
-def generate_nonce_timestamp():
-    """Generate unique nonce with uuid timestamp (UTC)."""
-    unique_uuid = uuid.uuid4()
-    nonce = bytes(__version__.encode('utf-8')) + unique_uuid.bytes
-    return nonce
+# ------------------------------------------------------------------------------
+# Version
+# ------------------------------------------------------------------------------
+version = '2.0.0'
+__major_version__ = "2"
+__minor_version__ = "0"
+__patch_version__ = "0"

@@ -41,11 +41,12 @@
 import os
 import sys
 from tqdm import *
-from .derivation import calc_derivation
-from .settings import __version__
-from .nonce import nonce_length
-from .nonce import generate_nonce_timestamp
-from .cascade import encry_decry_cascade
+
+from ._cascade_engine import encry_decry_cascade
+from ._derivation_engine import calc_derivation
+from ._chunk_engine import encry_decry_chunk
+from ._nonce_engine import nonce_length
+from ._settings import version
 
 try:
     import botan
@@ -89,33 +90,6 @@ def decryptstring(string, passphrase):
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
     return out.decode('utf-8')
-
-
-def _encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
-    """
-    When bool_encry is True, encrypt a chunk of the file with the key and a randomly generated nonce. When it is False,
-    the function extract the nonce from the cipherchunk (first 16 bytes), and decrypt the rest of the chunk.
-    :param chunk: a chunk in bytes to encrypt or decrypt.
-    :param key: a 32 bytes key in bytes.
-    :param bool_encry: if bool_encry is True, chunk is encrypted. Else, it will be decrypted.
-    :return: if bool_encry is True, corresponding nonce + cipherchunk else, a decrypted chunk.
-    """
-    engine = botan.cipher(algo=algo, encrypt=bool_encry)
-    engine.set_key(key=key)
-    engine.set_assoc_data(assoc_data)
-    if bool_encry is True:
-        nonce = generate_nonce_timestamp()
-        engine.start(nonce=nonce)
-        return nonce + engine.finish(chunk)
-    else:
-        nonce = chunk[:nonce_length]
-        encryptedchunk = chunk[nonce_length:nonce_length + gcmtag + chunk_size]
-        engine.start(nonce=nonce)
-        decryptedchunk = engine.finish(encryptedchunk)
-        if decryptedchunk == b"":
-            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        else:
-            return decryptedchunk
 
 
 # ------------------------------------------------------------------------------
@@ -168,8 +142,8 @@ def encryptfile(filename, passphrase, algo='srp'):
                     if len(chunk) == 0 or len(chunk) % chunk_size != 0:
                         finished = True
                     # An encrypted-chunk output is nonce, gcmtag, and cipher-chunk concatenation.
-                    encryptedchunk = _encry_decry_chunk(chunk=chunk, key=internal_key, bool_encry=True,
-                                                        algo=crypto_algo, assoc_data=header + salt + encrypted_key)
+                    encryptedchunk = encry_decry_chunk(chunk=chunk, key=internal_key, bool_encry=True,
+                                                       algo=crypto_algo, assoc_data=header + salt + encrypted_key)
                     filestreamout.write(encryptedchunk)
                     bar.update(1)
 
@@ -226,8 +200,8 @@ def decryptfile(filename, passphrase):
 
                     # Chunk decryption.
                     try:
-                        original = _encry_decry_chunk(chunk=encryptedchunk, key=internal_key, algo=decrypt_algo,
-                                                      bool_encry=False, assoc_data=fileheader + salt + encrypted_key)
+                        original = encry_decry_chunk(chunk=encryptedchunk, key=internal_key, algo=decrypt_algo,
+                                                     bool_encry=False, assoc_data=fileheader + salt + encrypted_key)
                     except Exception as e:
                         return e
                     else:

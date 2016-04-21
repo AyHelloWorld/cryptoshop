@@ -24,8 +24,8 @@
 
 import sys
 
-from .nonce import generate_nonce_timestamp
-from .nonce import nonce_length
+from ._nonce_engine import generate_nonce_timestamp
+from ._nonce_engine import nonce_length
 
 try:
     import botan

@@ -23,27 +23,17 @@
 # ############################################################################
 
 
-from cryptoshop.nonce import generate_nonce_timestamp
 from cryptoshop import encryptstring
 from cryptoshop import decryptstring
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
-
 
 import unittest
 
 
 class MyTestCase(unittest.TestCase):
     @staticmethod
-    def test_nonce_generating():
-        x = 0
-        while x < 100:
-            generate_nonce_timestamp()
-            x += 1
-
-    @staticmethod
     def test_enc_dec_string():
-
         # encrypt
         cryptostring = encryptstring(string="my super secret text to encrypt", passphrase="my passphrase")
 
