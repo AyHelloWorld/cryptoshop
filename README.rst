@@ -29,14 +29,15 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this th
 
 * It use Botan. Crypto and TLS library for C++11. For more information's on Botan, go here:
 
-`<http://botan.randombit.net>`_ and `<https://github.com/randombit/botan>`_
+| `<http://botan.randombit.net>`_
+| `<https://github.com/randombit/botan>`_
 
 
 It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for message authentication :
 
-https://en.wikipedia.org/wiki/Argon2
-https://www.cryptolux.org/index.php/Argon2
-https://github.com/P-H-C/phc-winner-argon2
+| https://en.wikipedia.org/wiki/Argon2
+| https://www.cryptolux.org/index.php/Argon2
+| https://github.com/P-H-C/phc-winner-argon2
 
 
 You can use it like console application:
