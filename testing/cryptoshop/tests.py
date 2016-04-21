@@ -24,34 +24,35 @@
 
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
+from cryptoshop import string_encrypt
+from cryptoshop import string_decrypt
 from cryptoshop.nonce import generate_nonce_timestamp
 from cryptoshop.internalkey import encry_decry_internalkey
 import unittest
 import botan
-import argon2
 
 
 class MyTestCase(unittest.TestCase):
     @staticmethod
     def test_nonce():
         x = 0
-        while x < 1000:
+        while x < 100:
             generate_nonce_timestamp()
             x += 1
 
     @staticmethod
-    def test_argon2():
-        salt = botan.rng().get(256)
-        argon2.low_level.hash_secret_raw((str.encode("my passphrase")), salt=salt, hash_len=32,
-                                         time_cost=2000, memory_cost=1024,
-                                         parallelism=8, type=argon2.low_level.Type.I)
+    def test_encrypt_decrypt_string():
+        secretstring = "my super secret text to encrypt"
+
+        # encrypt
+        cryptostring = string_encrypt(string=secretstring, passphrase="my passphrase")
+
+        # decrypt
+        string_decrypt(string=cryptostring, passphrase="my passphrase")
 
     @staticmethod
-    def test_encrypt():
+    def test_encrypt_decrypt_file():
         encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
-
-    @staticmethod
-    def test_decrypt():
         decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
 
     @staticmethod
@@ -62,10 +63,8 @@ class MyTestCase(unittest.TestCase):
         # encryption...
         encryptedkey = encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=key, masterkey=key2,
                                                bool_encry=True)
-
         # decryption
         encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=encryptedkey, masterkey=key2, bool_encry=False)
-
 
 if __name__ == '__main__':
     unittest.main()

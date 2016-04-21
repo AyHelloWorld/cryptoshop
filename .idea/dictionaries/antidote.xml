@@ -3,6 +3,7 @@
     <words>
       <w>decryptedchunk</w>
       <w>encryptedkey</w>
+      <w>encryptedstring</w>
       <w>encryptstring</w>
       <w>gcmtag</w>
       <w>internalkey</w>
