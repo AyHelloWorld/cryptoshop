@@ -48,6 +48,7 @@ from ._chunk_engine import encry_decry_chunk
 from ._nonce_engine import nonce_length
 from ._settings import version
 
+
 try:
     import botan
 except:
@@ -56,9 +57,9 @@ except:
     print("For Linux users, try to find it in your package manager.")
     sys.exit(0)
 
+b_version = bytes(version.encode('utf-8'))
 salt_size = 512  # in bits.(64 bytes)
 chunk_size = 5000000  # in bytes. (0.5 Mo)
-version = bytes(__version__.encode('utf-8'))
 
 # ------------------------------------------------------------------------------
 # Constant variables
@@ -74,7 +75,7 @@ header_length = 20  # in bits (2.5 bytes)
 # ------------------------------------------------------------------------------
 
 def encryptstring(string, passphrase):
-    header = b"Cryptoshop str " + version
+    header = b"Cryptoshop str " + b_version
     salt = botan.rng().get(salt_size)
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
@@ -106,13 +107,13 @@ def encryptfile(filename, passphrase, algo='srp'):
     """
     try:
         if algo == "srp":
-            header = b"Cryptoshop srp " + version
+            header = b"Cryptoshop srp " + b_version
             crypto_algo = "Serpent/GCM"
         if algo == "aes":
-            header = b"Cryptoshop aes " + version
+            header = b"Cryptoshop aes " + b_version
             crypto_algo = "AES-256/GCM"
         if algo == "twf":
-            header = b"Cryptoshop twf " + version
+            header = b"Cryptoshop twf " + b_version
             crypto_algo = "Twofish/GCM"
         if algo != "srp" and algo != "aes" and algo != "twf":
             return "No valid algo. Use 'srp' 'aes' or 'twf'"
@@ -165,13 +166,13 @@ def decryptfile(filename, passphrase):
         with open(filename, 'rb') as filestream:
             fileheader = filestream.read(header_length)
 
-            if fileheader == b"Cryptoshop srp " + version:
+            if fileheader == b"Cryptoshop srp " + b_version:
                 decrypt_algo = "Serpent/GCM"
-            if fileheader == b"Cryptoshop aes " + version:
+            if fileheader == b"Cryptoshop aes " + b_version:
                 decrypt_algo = "AES-256/GCM"
-            if fileheader == b"Cryptoshop twf " + version:
+            if fileheader == b"Cryptoshop twf " + b_version:
                 decrypt_algo = "Twofish/GCM"
-            if fileheader != b"Cryptoshop srp " + version and fileheader != b"Cryptoshop aes " + version and fileheader != b"Cryptoshop twf " + version:
+            if fileheader != b"Cryptoshop srp " + b_version and fileheader != b"Cryptoshop aes " + b_version and fileheader != b"Cryptoshop twf " + b_version:
                 return "Error: Bad header"
 
             salt = filestream.read(salt_size)

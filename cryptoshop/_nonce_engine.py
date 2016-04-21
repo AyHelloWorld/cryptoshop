@@ -23,8 +23,9 @@
 # ############################################################################
 
 import uuid
-from ._settings import version
+from _settings import version
 
+#version = b"2.0.0"
 nonce_length = 21  # in bytes (168 bits).
 
 
