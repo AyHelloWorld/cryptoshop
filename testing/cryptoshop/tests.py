@@ -41,17 +41,16 @@ class MyTestCase(unittest.TestCase):
             x += 1
 
     @staticmethod
-    def test_encrypt_decrypt_string():
-        secretstring = "my super secret text to encrypt"
+    def test_enc_dec_string():
 
         # encrypt
-        cryptostring = string_encrypt(string=secretstring, passphrase="my passphrase")
+        cryptostring = string_encrypt(string="my super secret text to encrypt", passphrase="my passphrase")
 
         # decrypt
-        string_decrypt(string=cryptostring, passphrase="my passphrase")
+        decrypted = string_decrypt(string=cryptostring, passphrase="my passphrase")
 
     @staticmethod
-    def test_encrypt_decrypt_file():
+    def test_enc_dec_file():
         encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
         decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
 
@@ -65,6 +64,7 @@ class MyTestCase(unittest.TestCase):
                                                bool_encry=True)
         # decryption
         encry_decry_internalkey(assoc_data=b"my assoc data", internalkey=encryptedkey, masterkey=key2, bool_encry=False)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -28,7 +28,7 @@ from .nonce import generate_nonce_timestamp
 nonce_length = 21
 
 
-def encryptstring(string, masterkey, assoc_data, bool_encry):
+def encrypt_string(string, masterkey, header, bool_encry):
     engine1 = botan.cipher(algo="Serpent/GCM", encrypt=bool_encry)
     engine2 = botan.cipher(algo="AES-256/GCM", encrypt=bool_encry)
     engine3 = botan.cipher(algo="Twofish/GCM", encrypt=bool_encry)
@@ -42,13 +42,13 @@ def encryptstring(string, masterkey, assoc_data, bool_encry):
     hashed2 = hash2.final()
 
     engine1.set_key(key=masterkey)
-    engine1.set_assoc_data(assoc_data)
+    engine1.set_assoc_data(header)
 
     engine2.set_key(key=hashed1)
-    engine2.set_assoc_data(assoc_data)
+    engine2.set_assoc_data(header)
 
     engine3.set_key(key=hashed2)
-    engine3.set_assoc_data(assoc_data)
+    engine3.set_assoc_data(header)
 
     if bool_encry is True:
         nonce1 = generate_nonce_timestamp()
@@ -64,7 +64,6 @@ def encryptstring(string, masterkey, assoc_data, bool_encry):
         encrypted3 = engine3.finish(encrypted2)
         return nonce1 + nonce2 + nonce3 + encrypted3
     else:
-
         nonce1 = string[:nonce_length]
         nonce2 = string[nonce_length:nonce_length * 2]
         nonce3 = string[nonce_length * 2:nonce_length * 3]

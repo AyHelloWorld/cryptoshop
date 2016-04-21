@@ -92,9 +92,12 @@ def encry_decry_internalkey(internalkey, masterkey, bool_encry, assoc_data):
         engine3.start(nonce=nonce3)
 
         decryptedkey1 = engine3.finish(encryptedkey)
+        if decryptedkey1 == b"":
+            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         decryptedkey2 = engine2.finish(decryptedkey1)
+        if decryptedkey2 == b"":
+            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         decryptedkey3 = engine1.finish(decryptedkey2)
-
         if decryptedkey3 == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
         else:
