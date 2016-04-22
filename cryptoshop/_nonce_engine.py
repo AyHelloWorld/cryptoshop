@@ -31,8 +31,8 @@ count = 1
 def generate_nonce_timestamp():
     """Generate unique nonce with uuid timestamp (UTC)."""
     global count
-    rng = botan.rng().get(96)
+    rng = botan.rng().get(20)
     tmpnonce = (bytes(str(count).encode('utf-8'))) + rng
-    nonce = tmpnonce[:16]
+    nonce = tmpnonce[:12]  # 96 bytes
     count += 1
     return nonce
