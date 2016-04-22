@@ -27,18 +27,29 @@ from cryptoshop import encryptstring
 from cryptoshop import decryptstring
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
+from _nonce_engine import generate_nonce_timestamp
 
 import unittest
+import botan
 
 
 class MyTestCase(unittest.TestCase):
+    @staticmethod
+    def test_nonce():
+        i = 1
+        while i < 10:
+            n = generate_nonce_timestamp()
+            print(n)
+            i += 1
+
     @staticmethod
     def test_enc_dec_string():
         # encrypt
         cryptostring = encryptstring(string="my super secret text to encrypt", passphrase="my passphrase")
 
         # decrypt
-        decryptstring(string=cryptostring, passphrase="my passphrase")
+        cool = decryptstring(string=cryptostring, passphrase="my passphrase")
+        print(cool)
 
     @staticmethod
     def test_enc_dec_file():

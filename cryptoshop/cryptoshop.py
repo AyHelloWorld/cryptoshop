@@ -72,7 +72,7 @@ b_version = bytes(__version__.encode('utf-8'))
 # Constant variables
 # ------------------------------------------------------------------------------
 internal_key_length = 32  # in bytes (256 bits).
-encrypted_key_length = 143  # in bytes (1144 bits):   3*nonce + 3*tag + 32
+encrypted_key_length = 3*__nonce_length__+3*__gcmtag_length__+32  # in bytes (1144 bits):   3*nonce + 3*tag + 32
 header_length = 20  # in bits (2.5 bytes)
 
 
@@ -134,7 +134,7 @@ def encryptfile(filename, passphrase, algo='srp'):
         # Encrypt internal key...
         encrypted_key = encry_decry_cascade(data=internal_key, masterkey=masterkey,
                                             bool_encry=True,
-                                            assoc_data=header + salt)
+                                            assoc_data=header)
         with open(filename, 'rb') as filestream:
             with open(str(outname), 'wb') as filestreamout:
                 filestreamout.write(header)
@@ -150,7 +150,7 @@ def encryptfile(filename, passphrase, algo='srp'):
                         finished = True
                     # An encrypted-chunk output is nonce, gcmtag, and cipher-chunk concatenation.
                     encryptedchunk = encry_decry_chunk(chunk=chunk, key=internal_key, bool_encry=True,
-                                                       algo=crypto_algo, assoc_data=header + salt + encrypted_key)
+                                                       algo=crypto_algo, assoc_data=header)
                     filestreamout.write(encryptedchunk)
                     bar.update(1)
 
@@ -190,7 +190,7 @@ def decryptfile(filename, passphrase):
             # Decrypt internal key...
             try:
                 internal_key = encry_decry_cascade(data=encrypted_key, masterkey=masterkey,
-                                                   bool_encry=False, assoc_data=fileheader + salt)
+                                                   bool_encry=False, assoc_data=fileheader)
             except Exception as e:
                 return e
 
@@ -208,7 +208,7 @@ def decryptfile(filename, passphrase):
                     # Chunk decryption.
                     try:
                         original = encry_decry_chunk(chunk=encryptedchunk, key=internal_key, algo=decrypt_algo,
-                                                     bool_encry=False, assoc_data=fileheader + salt + encrypted_key)
+                                                     bool_encry=False, assoc_data=fileheader)
                     except Exception as e:
                         return e
                     else:

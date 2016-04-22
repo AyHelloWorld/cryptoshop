@@ -84,6 +84,10 @@ def encry_decry_cascade(data, masterkey, bool_encry, assoc_data):
         nonce1 = data[:__nonce_length__]
         nonce2 = data[__nonce_length__:__nonce_length__ * 2]
         nonce3 = data[__nonce_length__ * 2:__nonce_length__ * 3]
+
+        if (nonce1[:8] < nonce2[:8] < nonce3[:8]) is False:
+            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
+
         encrypteddata = data[__nonce_length__ * 3:]
 
         engine1.start(nonce=nonce1)

@@ -23,11 +23,18 @@
 # ############################################################################
 
 import uuid
-import cryptoshop._settings
+import botan
+
+count = 1
 
 
 def generate_nonce_timestamp():
     """Generate unique nonce with uuid timestamp (UTC)."""
-    unique_uuid = uuid.uuid4()
-    nonce = bytes(cryptoshop._settings.__version__.encode('utf-8')) + unique_uuid.bytes
+    global count
+    test = "{0:0{1}d}".format(count, 8)
+    uniqueuuid = uuid.uuid4().bytes
+    rng = botan.rng().get(96)
+    tmpnonce = bytes(test.encode('utf-8')) + uniqueuuid + rng
+    nonce = tmpnonce[:96]
+    count += 1
     return nonce
