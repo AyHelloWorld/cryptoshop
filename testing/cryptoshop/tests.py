@@ -30,7 +30,6 @@ from cryptoshop import decryptfile
 from _nonce_engine import generate_nonce_timestamp
 
 import unittest
-import botan
 
 
 class MyTestCase(unittest.TestCase):
