@@ -22,7 +22,6 @@
 #    along with Cryptoshop.  If not, see <http://www.gnu.org/licenses/>.
 # ############################################################################
 
-import uuid
 import botan
 
 count = 1
@@ -35,4 +34,5 @@ def generate_nonce_timestamp():
     tmpnonce = (bytes(str(count).encode('utf-8'))) + rng
     nonce = tmpnonce[:12]  # 96 bytes
     count += 1
+
     return nonce
