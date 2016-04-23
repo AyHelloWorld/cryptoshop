@@ -1,7 +1,8 @@
-**********
-Cryptoshop
-**********
-v.2.0.1
+**********************
+Cryptoshop v.2.0.2 dev
+**********************
+USE STABLE 2.0.1 HERE :
+| https://github.com/Antidote1911/cryptoshop/tree/2.0.1
 
 A Python 3 module to encrypt and decrypt files or string in GCM mode with AES, Serpent or Twofish as secure as possible.
 Contact: antidote1911@gmail.com
