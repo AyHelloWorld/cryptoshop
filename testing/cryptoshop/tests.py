@@ -28,7 +28,6 @@ from cryptoshop import decryptstring
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
 from _nonce_engine import generate_nonce_timestamp
-import botan
 import unittest
 
 
@@ -37,8 +36,7 @@ class MyTestCase(unittest.TestCase):
     def test_nonce():
         i = 1
         while i < 10:
-            n = generate_nonce_timestamp()
-            print(botan.hex_encode(n))
+            generate_nonce_timestamp()
             i += 1
 
     @staticmethod

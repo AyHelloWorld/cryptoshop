@@ -179,7 +179,7 @@ def decryptfile(filename, passphrase):
             if fileheader == b"Cryptoshop twf " + b_version:
                 decrypt_algo = "Twofish/GCM"
             if fileheader != b"Cryptoshop srp " + b_version and fileheader != b"Cryptoshop aes " + b_version and fileheader != b"Cryptoshop twf " + b_version:
-                return "Error: Bad header"
+                raise Exception("Integrity failure: Bad header")
 
             salt = filestream.read(__salt_size__)
             encrypted_key = filestream.read(encrypted_key_length)
