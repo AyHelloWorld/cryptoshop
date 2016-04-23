@@ -132,16 +132,16 @@ The final Cryptoshop format is:
     header                                                            2.5 bytes *
     passsalt                                                           64 bytes *
     ***************************                                                 *
-    nonce1 + nonce2 + nonce3                                       21 * 3 bytes *
+    nonce1 + nonce2 + nonce3                                       41 * 3 bytes *
     enckey + GCM Tag1 + GCM Tag2 + GCM Tag3                   21*3 + 3*16 bytes *
     ***************************                                                 *
-    nonce4 + cipherchunk1 + GCM Tag4            21 bytes + chunkSize + 16 bytes *
+    nonce4 + cipherchunk1 + GCM Tag4            41 bytes + chunkSize + 16 bytes *
     ---------------                                                             *
-    nonce5 + cipherchunk2 + GCM Tag5            21 bytes + chunkSize + 16 bytes *
+    nonce5 + cipherchunk2 + GCM Tag5            41 bytes + chunkSize + 16 bytes *
     ---------------                                                             *
-    nonce6 + cipherchunk3 + GCM Tag6            21 bytes + chunkSize + 16 bytes *
+    nonce6 + cipherchunk3 + GCM Tag6            41 bytes + chunkSize + 16 bytes *
     ---------------                                                             *
-    nonceN + cipherchunkN + GCM Tag7            21 bytes + chunkSize + 16 bytes *
+    nonceN + cipherchunkN + GCM Tag7            41 bytes + chunkSize + 16 bytes *
     ---------------                                                             *
     *****************************************************************************
 
