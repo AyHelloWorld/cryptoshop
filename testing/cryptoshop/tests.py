@@ -29,9 +29,20 @@ from cryptoshop import encryptfile
 from cryptoshop import decryptfile
 from _nonce_engine import generate_nonce_timestamp
 import unittest
+import pysodium
+import botan
 
 
 class MyTestCase(unittest.TestCase):
+    @staticmethod
+    def test_salsabox():
+        nonce = botan.rng().get(16)
+        msg = b'But then of course African swallows are not migratory.'
+        box = pysodium.crypto_secretbox(msg=msg, nonce=nonce, k=b"yyyyyy")
+        out = pysodium.crypto_secretbox_open(c=box, nonce=nonce, k=b"yyyyyy")
+        print(box)
+        print(out)
+
     @staticmethod
     def test_nonce():
         i = 1
@@ -42,16 +53,20 @@ class MyTestCase(unittest.TestCase):
     @staticmethod
     def test_enc_dec_string():
         # encrypt
-        cryptostring = encryptstring(string="my super secret text to encrypt", passphrase="my passphrase")
+
+        pt = "my super secret text to encrypt"
+        cryptostring = encryptstring(string=pt, passphrase="my passphrase")
 
         # decrypt
+
         cool = decryptstring(string=cryptostring, passphrase="my passphrase")
-        print(cool)
+        assert (cool == pt)
 
     @staticmethod
     def test_enc_dec_file():
         encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
-        decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
+        result = decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
+        assert (result == "successfully decrypted")
 
 
 if __name__ == '__main__':

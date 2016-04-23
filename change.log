@@ -1,3 +1,8 @@
+2.0.2
+-----
+
+
+
 2.0.1
 -----
 NIST recommends a 96-bits nonce length for performance critical situations but it can be up to 2^64 - 1 bits.

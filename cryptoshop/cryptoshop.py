@@ -72,7 +72,7 @@ b_version = bytes(__version__.encode('utf-8'))
 # Constant variables
 # ------------------------------------------------------------------------------
 internal_key_length = 32  # in bytes (256 bits).
-encrypted_key_length = 3*__nonce_length__+3*__gcmtag_length__+32  # 3*nonce + 3*tag + 32
+encrypted_key_length = 3 * __nonce_length__ + 3 * __gcmtag_length__ + 32  # 3*nonce + 3*tag + 32
 header_length = 20  # in bits (2.5 bytes)
 
 
@@ -96,7 +96,10 @@ def decryptstring(string, passphrase):
 
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
-    return out.decode('utf-8')
+    if out == "Integrity failure: Invalid passphrase or corrupted data":
+        return out
+    else:
+        return out.decode('utf-8')
 
 
 # ------------------------------------------------------------------------------

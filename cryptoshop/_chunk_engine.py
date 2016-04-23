@@ -61,5 +61,4 @@ def encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
         decryptedchunk = engine.finish(encryptedchunk)
         if decryptedchunk == b"":
             raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        else:
-            return decryptedchunk
+        return decryptedchunk
