@@ -35,8 +35,6 @@ except:
 from ._nonce_engine import generate_nonce_timestamp
 from ._settings import __chunk_size__, __gcmtag_length__, __nonce_length__
 
-count = b'00000001'
-
 
 def encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
     """
@@ -58,12 +56,6 @@ def encry_decry_chunk(chunk, key, algo, bool_encry, assoc_data):
         return nonce + engine.finish(chunk)
     else:
         nonce = chunk[:__nonce_length__]
-        noncecount = nonce[:8]
-        global count
-        if noncecount <= count:
-            raise Exception("Integrity failure: Invalid passphrase or corrupted data")
-        count = noncecount
-
         encryptedchunk = chunk[__nonce_length__:__nonce_length__ + __gcmtag_length__ + __chunk_size__]
         engine.start(nonce=nonce)
         decryptedchunk = engine.finish(encryptedchunk)

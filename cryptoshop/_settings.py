@@ -47,8 +47,8 @@ __chunk_size__ = 5000000  # in bytes. (0.5 Mo)
 
 __salt_size__ = 512  # in bits.(64 bytes)
 
-__argon2_timing_cost__ = 3000
-__argon2_memory_cost__ = 1024
+__argon2_timing_cost__ = 2000
+__argon2_memory_cost__ = 720
 __argon2_parallelism__ = 2
 
 
