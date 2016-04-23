@@ -13,10 +13,12 @@ version = main_namespace['__version__']
 setup(
     name='cryptoshop',
     version=version,
+    keywords=['aes', 'encrypt', 'decrypt', 'encryption', 'decryption', 'serpent', 'argon', 'secure', 'crypto',
+              'cryptography', 'twofish', 'gcm', 'argon2', 'botan'],
     packages=find_packages(),
     author="Fabrice Corraire",
     author_email="antidote1911@gmail.com",
-    description="Encrypt and decrypt file in GCM mode with AES, Serpent or Twofish as secure as possible.",
+    description="Encrypt and decrypt file or string in GCM mode with AES, Serpent or Twofish as secure as possible.",
     long_description=open('README.rst').read(),
     install_requires=['tqdm', 'argon2_cffi'],
     include_package_data=True,
