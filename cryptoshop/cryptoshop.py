@@ -134,11 +134,14 @@ def encryptfile(filename, passphrase, algo='srp'):
                                             bool_encry=True,
                                             assoc_data=header)
         with open(filename, 'rb') as filestream:
+            file_size = os.stat(filename).st_size
+            if file_size == 0:
+                raise Exception("Error: You can't encrypt empty file.")
             with open(str(outname), 'wb') as filestreamout:
                 filestreamout.write(header)
                 filestreamout.write(salt)
                 filestreamout.write(encrypted_key)
-                file_size = os.stat(filename).st_size
+
                 finished = False
                 # the maximum of the progress bar is the total chunk to process. It's files_size // chunk_size
                 bar = tqdm(range(file_size // __chunk_size__))
@@ -168,6 +171,10 @@ def decryptfile(filename, passphrase):
     try:
         outname = os.path.splitext(filename)[0].split("_")[-1]  # create a string file name without extension.
         with open(filename, 'rb') as filestream:
+            file_size = os.stat(filename).st_size
+            if file_size == 0:
+                raise Exception("Error: You can't decrypt empty file.")
+
             fileheader = filestream.read(header_length)
 
             if fileheader == b"Cryptoshop srp " + b_version:
@@ -194,7 +201,6 @@ def decryptfile(filename, passphrase):
 
             with open(str(outname), 'wb') as filestreamout:
                 files_size = os.stat(filename).st_size
-
                 # the maximum of the progress bar is the total chunk to process. It's files_size // chunk_size
                 bar = tqdm(range(files_size // __chunk_size__))
                 while True:
