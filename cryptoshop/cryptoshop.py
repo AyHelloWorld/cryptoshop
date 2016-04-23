@@ -83,7 +83,6 @@ header_length = 20  # in bits (2.5 bytes)
 def encryptstring(string, passphrase):
     header = b"Cryptoshop str " + b_version
     salt = botan.rng().get(__salt_size__)
-
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=string, masterkey=key, bool_encry=True, assoc_data=header)
     return header + salt + out
@@ -93,13 +92,9 @@ def decryptstring(string, passphrase):
     header = string[:header_length]
     salt = string[header_length:__salt_size__ + header_length]
     encryptedstring = string[header_length + __salt_size__:]
-
     key = calc_derivation(passphrase=passphrase, salt=salt)
     out = encry_decry_cascade(data=encryptedstring, masterkey=key, bool_encry=False, assoc_data=header)
-    if out == "Integrity failure: Invalid passphrase or corrupted data":
-        return out
-    else:
-        return out.decode('utf-8')
+    return out.decode('utf-8')
 
 
 # ------------------------------------------------------------------------------
