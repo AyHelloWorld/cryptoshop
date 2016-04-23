@@ -37,7 +37,7 @@ __website__ = "https://github.com/Antidote1911/cryptoshop"
 __version__ = '2.0.1'
 __major_version__ = "2"
 __minor_version__ = "0"
-__patch_version__ = "0"
+__patch_version__ = "1"
 
 
 # ------------------------------------------------------------------------------
