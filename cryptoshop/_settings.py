@@ -34,11 +34,10 @@ __website__ = "https://github.com/Antidote1911/cryptoshop"
 # ------------------------------------------------------------------------------
 # Version
 # ------------------------------------------------------------------------------
-__version__ = '2.0.1'
+__version__ = '2.0.2'
 __major_version__ = "2"
 __minor_version__ = "0"
-__patch_version__ = "1"
-
+__patch_version__ = "2"
 
 # ------------------------------------------------------------------------------
 # Global Parameters. Adjust if you want.
@@ -47,10 +46,9 @@ __chunk_size__ = 5000000  # in bytes. (0.5 Mo)
 
 __salt_size__ = 512  # in bits.(64 bytes)
 
-__argon2_timing_cost__ = 2000
-__argon2_memory_cost__ = 720
+__argon2_timing_cost__ = 25
+__argon2_memory_cost__ = 1 << 16  # 64 mebibytes memory usage
 __argon2_parallelism__ = 2
-
 
 # ------------------------------------------------------------------------------
 # Global Constants. DO NOT CHANGE.

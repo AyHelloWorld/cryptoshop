@@ -1,6 +1,11 @@
 2.0.2
 -----
-
+- change argon2_timing_cost to 25
+- change argon2_memory_cost to 1 << 16  (64 mebibytes memory usage)
+- Remove unitests from test.py. I use pytest now.
+- Add some tests to tests.py . Not necessary used by cryptoshop in this version, but for future usage.
+- For future usage, Add a "calc_derivation_formated" function to _derivation_engine. The standard Argon2 output is like this:
+$argon2i$v=19$m=65536,t=25,p=2$MTIzNDU2Nzg5$IDESCoEh89zGN7Nt3ecEMrEjN+oYO62p1m/ExgqTy3o
 
 
 2.0.1

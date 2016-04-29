@@ -27,37 +27,47 @@ from cryptoshop import encryptstring
 from cryptoshop import decryptstring
 from cryptoshop import encryptfile
 from cryptoshop import decryptfile
-from _nonce_engine import generate_nonce_timestamp
-import unittest
+from cryptoshop._nonce_engine import generate_nonce_timestamp
+from cryptoshop._derivation_engine import calc_derivation
+from cryptoshop._derivation_engine import calc_derivation_formated
 
 
-class MyTestCase(unittest.TestCase):
-
-    @staticmethod
-    def test_nonce():
-        i = 1
-        while i < 10:
-            generate_nonce_timestamp()
-            i += 1
-
-    @staticmethod
-    def test_enc_dec_string():
-        # encrypt
-        pt = "my super secret text to encrypt"
-        cryptostring = encryptstring(string=pt, passphrase="my passphrase")
-
-        # decrypt
-        cool = decryptstring(string=cryptostring, passphrase="my passphrase")
-        assert (cool == pt)
-
-    @staticmethod
-    def test_enc_dec_file():
-        # encrypt
-        encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="twf")
-        # decrypt
-        result = decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
-        assert (result == "successfully decrypted")
+def test_derivation():
+    print("============< test Argon2 derivation raw >============")
+    print("passphrase= my password")
+    print("salt= b'123456789'")
+    test = calc_derivation(passphrase="my password", salt=b"123456789")
+    print("hash= " + str(test))
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_derivation2():
+    print("============< test Argon2 derivation formated >============")
+    print("passphrase= my password")
+    print("salt= b'123456789'")
+    test = calc_derivation_formated(passphrase="my password", salt=b"123456789")
+    print("hash= " + str(test))
+
+
+def test_nonce():
+    print("============< test generating 100 uniques nonces  >============")
+    i = 1
+    while i < 100:
+        print(generate_nonce_timestamp())
+        i += 1
+
+
+def test_enc_dec_string():
+    # encrypt
+    pt = "my super secret text to encrypt"
+    cryptostring = encryptstring(string=pt, passphrase="my passphrase")
+
+    # decrypt
+    assert decryptstring(string=cryptostring, passphrase="my passphrase") == pt
+
+
+def test_enc_dec_file():
+    # encrypt
+    encryptfile(filename="encrypt.me", passphrase="my passphrase", algo="srp")
+    # decrypt
+    result = decryptfile(filename="encrypt.me.cryptoshop", passphrase="my passphrase")
+    assert (result == "successfully decrypted")

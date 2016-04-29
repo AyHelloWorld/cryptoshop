@@ -8,6 +8,7 @@
       <w>encryptstring</w>
       <w>gcmtag</w>
       <w>internalkey</w>
+      <w>mebibytes</w>
     </words>
   </dictionary>
 </component>
