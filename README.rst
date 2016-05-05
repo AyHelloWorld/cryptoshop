@@ -34,7 +34,7 @@ mode. <https://en.wikipedia.org/wiki/Galois/Counter_Mode>`__ with one of this th
 | `<https://github.com/randombit/botan>`_
 
 
-It use Argon2 for key derivation/stretching and HMAC-Keccak-1600 for message authentication :
+It use Argon2 for key derivation/stretching :
 
 | https://en.wikipedia.org/wiki/Argon2
 | https://www.cryptolux.org/index.php/Argon2
